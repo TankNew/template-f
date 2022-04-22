@@ -1,0 +1,32 @@
+// out: false
+.breadCrumb-container {
+  display: none;
+  background-color: @bg-gray;
+  @media @tablet {
+    display: block;
+  }
+  .breadcrumb {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 1rem;
+    list-style: none;
+    margin-bottom: 0;
+    border-radius: 0.25rem;
+  }
+  .breadcrumb-item + .breadcrumb-item {
+    padding-left: 0.5rem;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: @color-primary;
+    content: '/';
+  }
+
+  .breadcrumb-item.active {
+    color: @color-gray-lighter;
+  }
+}

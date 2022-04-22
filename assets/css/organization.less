@@ -1,0 +1,97 @@
+.tank-tree {
+  &.sub {
+    padding-left: 2.9rem;
+    li {
+      &::before {
+        height: 100%;
+        content: '';
+        position: absolute;
+        left: -1rem;
+        top: 0;
+        border-left: 1px solid @color-gray;
+      }
+      &:first-child {
+        &::before {
+          height: 50%;
+          content: '';
+          position: absolute;
+          left: -1rem;
+          top: 50%;
+          border-left: 1px solid @color-gray;
+        }
+      }
+      &:last-child {
+        &::before {
+          height: 50%;
+          content: '';
+          position: absolute;
+          left: -1rem;
+          top: 0;
+          border-left: 1px solid @color-gray;
+        }
+      }
+      &:only-child {
+        &::before {
+          top: calc(50% - 1px);
+          height: 1px;
+        }
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+  li {
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1rem;
+    position: relative;
+
+    > span {
+      display: block;
+      border: 1px solid @color-gray;
+      border-radius: 0.4rem;
+      margin: 0.4rem 0;
+      padding: 0.4rem;
+      min-height: 10rem;
+      position: relative;
+      letter-spacing: 0.6rem;
+      writing-mode: vertical-lr;
+      @media @tablet {
+        min-width: 10rem;
+        min-height: unset;
+        writing-mode: horizontal-tb;
+      }
+      &.sub::before {
+        width: 2rem;
+        height: 0.1rem;
+        content: '';
+        position: absolute;
+        left: -2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        border-top: 1px solid @color-gray;
+      }
+
+      &.next::after {
+        width: 2rem;
+        height: 0.1rem;
+        content: '';
+        position: absolute;
+        right: -2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        border-top: 1px solid @color-gray;
+      }
+    }
+  }
+}

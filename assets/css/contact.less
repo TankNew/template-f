@@ -1,0 +1,32 @@
+// out: false
+.contactus {
+  margin: 0 auto;
+  text-align: center;
+  ul {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    flex-direction: column;
+    li {
+      padding: 1rem 0;
+      label {
+        &::after {
+          content: ':';
+        }
+      }
+      i {
+        color: @color-white;
+        margin-right: 0.6rem;
+      }
+    }
+  }
+  @media @tablet{
+    .address {
+      flex-direction: column;
+      li {
+        margin: 1rem;
+      }
+    }
+  }
+}
