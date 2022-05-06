@@ -1,16 +1,48 @@
 // out: false
 .breadCrumb-container {
-  display: none;
-  background-color: @bg-gray;
-  @media @tablet {
-    display: block;
+  display: block;
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  z-index: 1;
+  background-color: transparent;
+  box-sizing: border-box;
+  padding: 0 15px;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+  // transition: all 0.2s;
+  // @media @max-tablet{
+  // }
+  // @media @tablet{
+  // }
+  .container{
+    width: 100%;
+    max-width: unset;
+
+    transition: all 0.3s;
+    @media @max-tablet{
+      max-width: unset;
+    }
+    @media @tablet{
+      max-width: @min-width;
+      .breadcrumb {
+        margin-bottom: 20px;
+      }
+    }
+    @media @min-desktop {
+      max-width: @max-width;
+      .breadcrumb {
+        margin-bottom: 30px;
+      }
+    }
   }
   .breadcrumb {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    padding: 1rem;
+    padding: 0rem;
     list-style: none;
     margin-bottom: 0;
     border-radius: 0.25rem;
@@ -18,15 +50,73 @@
   .breadcrumb-item + .breadcrumb-item {
     padding-left: 0.5rem;
   }
+  .breadcrumb-item {
+    // text-shadow: none;
+    transition: all 0.3s;
+    @media @max-tablet{
+      font-size: 14px;
+    }
+    @media @tablet{
+      font-size: 18px;
+    }
+    a {
+      color: @color-white;
+    }
+    i {
+      vertical-align: middle;
+      padding: 0 0.6rem 0 0;
+      transition: all 0.3s;
+      @media @max-tablet{
+        font-size: 12px;
+      }
+      @media @tablet{
+        font-size: 14px;
+      }
+      @media @min-desktop {
+        font-size: 14px;
+      }
+    }
+  }
 
   .breadcrumb-item + .breadcrumb-item::before {
     display: inline-block;
-    padding-right: 0.5rem;
-    color: @color-primary;
-    content: '/';
+    padding: 0 1rem;
+    color: @color-white;
+    content: '>';
   }
 
   .breadcrumb-item.active {
-    color: @color-gray-lighter;
+    color: @color-white;
+  }
+
+
+  .path-bor{
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      min-width: 33.33%;
+      padding: 0 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(221, 221, 221, 0.8);
+      box-sizing: border-box;
+      text-align: center;
+      color: #555;
+      text-shadow: none;
+      line-height: 34px;
+      cursor: pointer;
+      &.action {
+        background-color: hsla(@color-primary-hsl, 0.8);
+        color: #fff;
+      }
+    }
+    transition: all 0.2s;
+    @media @tablet{
+      .item {
+        line-height: 58px;
+        padding: 0 10px;
+        font-size: 18px;
+        min-width: 160px;
+      }
+    }
   }
 }

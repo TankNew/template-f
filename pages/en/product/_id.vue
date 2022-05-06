@@ -2,8 +2,12 @@
   <div class="container">
     <h4 class="page-title wide">
       <span class="name">{{ currentPath.displayName }}</span>
-      <span class="more"></span>
+      <!-- <span class="subtitle">/{{ '' }}</span> -->
+      <!-- <span class="more"></span> -->
     </h4>
+    <section v-if="currentPath"
+      class="page-product-head"
+      v-html="currentPath.catalogGroup.info"></section>
     <section v-if="hasChildren">
       <div class="page-product-list">
         <ul>
@@ -50,7 +54,6 @@
           v-model="currentPage"
           :per-page="perPage"
           :total-rows="pageContent.totalCount"
-          
           pills
           @input="pageChange"
         ></pagination>
@@ -77,7 +80,8 @@ export default {
       navbars: state => state.app.navbars,
       currentPath: state => state.app.currentPath,
       currentPathParent: state => state.app.currentPathParent,
-      hasChildren: state => state.app.currentPath.children.length > 0
+      // hasChildren: state => state.app.currentPath.children.length > 0
+      hasChildren: state => state.app.currentPath.children && state.app.currentPath.children.length && state.app.currentPath.children.length > 0
     })
   },
   validate({ params }) {
@@ -129,7 +133,7 @@ export default {
           typename = 'product'
           break
       }
-      window.open(`/${this.culture}/` + typename + '/detail/' + String(id), '_blank')
+      this.$router.push(`/${this.culture}/` + typename + '/detail/' + String(id))
     },
     async pageChange() {
       const params = {

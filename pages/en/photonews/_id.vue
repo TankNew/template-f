@@ -3,7 +3,7 @@
     <div class="news-page-block-title">
       <h4 class="page-title wide">
         <span class="name">{{ currentPath.displayName }}</span>
-        <span class="more">
+        <!-- <span class="more">
           <a v-if="collapse" @click="collapse=!collapse">
             {{ $L(`Expand`) }}
             <i class="fas fa-angle-down"></i>
@@ -12,9 +12,9 @@
             {{ $L(`Collapse`) }}
             <i class="fas fa-angle-up"></i>
           </a>
-        </span>
+        </span> -->
       </h4>
-      <div
+      <!-- <div
         v-if="currentPath.children&&currentPath.children.length>0"
         :class="['page-sub-groups',collapse?'':'expand']"
       >
@@ -30,10 +30,10 @@
             </dl>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <section class="page-news-list-container">
-      <div class="page-news-leftbar">
+      <!-- <div class="page-news-leftbar">
         <dl
           v-if="currentPath.children.length>0"
           class="page-news-leftbar-groups"
@@ -65,7 +65,7 @@
             {{ companyInfo.email }}
           </dd>
         </dl>
-      </div>
+      </div> -->
       <div class="page-photo-news-list">
         <ul>
           <li v-for="item in pageContent.items" :key="item.id">
@@ -175,7 +175,7 @@ export default {
           typename = 'product'
           break
       }
-      window.open(`/${this.culture}/` + typename + '/detail/' + String(id), '_blank')
+      this.$router.push({ path: `/${this.culture}/` + typename + '/detail/' + String(id) })
     },
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)

@@ -1,9 +1,15 @@
 <template>
   <div class="container">
-    <h4 class="page-detail-title">
-      <span>{{ catalogItem.title }}</span>
-    </h4>
-    <h6 class="page-sub-title">{{ formatDate(catalogItem.creationTime) }}</h6>
+    <div class="page-news-detail-container">
+      <div class="page-news-detail-content">
+        <h4 class="page-detail-title">
+          <span>{{ catalogItem.title }}</span>
+        </h4>
+        <h6 class="page-sub-title">
+          <span>{{ formatDate(catalogItem.creationTime) }}</span>
+        </h6>
+        <hr class="page-sub-hr">
+        
     <div class="page-content limit-width">
       <div class="news-detail">
         <div
@@ -32,6 +38,8 @@
           <div slot="button-next" class="swiper-button-next"></div>
         </div>
         <div v-html="catalogItem.content"></div>
+      </div>
+    </div>
       </div>
     </div>
   </div>

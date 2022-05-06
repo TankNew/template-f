@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h4 class="page-title">
+    <!-- <h4 class="page-title">
       <span class="name">{{ currentPath.displayName }}</span>
       <span class="more"></span>
-    </h4>
+    </h4> -->
     <div class="page-content">
       <div class="partners">
         <ul>
@@ -12,10 +12,10 @@
             :key="item.id"
             :style="'animation-delay:'+index*0.5+'s;'"
           >
-            <span class="logo-container">
-              <img :src="item.logo" />
-            </span>
             <a :href="item.url" class="gray" target="_blank">
+              <span class="logo-container">
+                <img :src="item.logo" />
+              </span>
               <span>{{ item.title }}</span>
             </a>
           </li>
@@ -35,7 +35,7 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 const c = 1
-const p = 8
+const p = 10
 export default {
   data() {
     return {
@@ -64,7 +64,7 @@ export default {
 
   created() {},
   methods: {
-    async pageChange() {
+    async pageChange() { 
       const params = {
         params: {
           SkipCount: (this.currentPage - 1) * this.perPage,

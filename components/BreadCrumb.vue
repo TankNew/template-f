@@ -5,6 +5,7 @@
       :key="index"
       :class="['breadcrumb-item',item.to&&item.to.toLowerCase()?'active':'']"
     >
+      <i v-if="!index" class="fas fa-location-arrow"></i>
       <span v-if="item.to&&item.to.toLowerCase()===path">{{ item.text }}</span>
       <router-link v-else :to="item.to||''">{{ item.text }}</router-link>
     </li>

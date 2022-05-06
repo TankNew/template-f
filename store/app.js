@@ -3,6 +3,7 @@ const state = () => ({
   navbars: [],
   currentPath: {},
   currentPathParent: {},
+  currentPathBrother: [],
   breadCrumbItems: [],
   partners: [],
   homePage: {},
@@ -63,12 +64,14 @@ const actions = {
           }
         }
         context.state.currentPathParent = currentPathParent
+        context.state.currentPathBrother = parents && parents.length > 1
+          ? parents[parents.length - 2].children : []
       }
     }
   },
   setBreadCrumb(context, ...args) {
     context.state.breadCrumbItems = []
-    for (let i = 0; i < args.length; i++) {
+    for (let i = 1; i < args.length; i++) {
       context.state.breadCrumbItems.push({
         text: args[i].displayName,
         to: args[i].url
@@ -133,6 +136,13 @@ const actions = {
   },
   async getPartner(context, params) {
     const res = await this.$axios.get('/api/services/app/Partner/GetAll', params)
+    if (res.data.success) {
+      context.state.partners = res.data.result
+      return res.data.result
+    }
+  },
+  async getHr(context, params) {
+    const res = await this.$axios.get('/api/services/app/Hr/GetAll', params)
     if (res.data.success) {
       context.state.partners = res.data.result
       return res.data.result

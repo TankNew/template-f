@@ -2,8 +2,9 @@
   <div class="container">
     <div class="news-page-block-title">
       <h4 class="page-title wide">
-        <span class="name">{{ currentPath.displayName }}</span>
-        <span class="more">
+        <!-- <span class="name">{{ currentPath.displayName }}</span>
+        <span class="subtitle">/{{ '' }}</span> -->
+        <!-- <span class="more">
           <a v-if="collapse" @click="collapse=!collapse">
             {{ $L(`Expand`) }}
             <i class="fas fa-angle-down"></i>
@@ -12,9 +13,9 @@
             {{ $L(`Collapse`) }}
             <i class="fas fa-angle-up"></i>
           </a>
-        </span>
+        </span> -->
       </h4>
-      <div
+      <!-- <div
         v-if="currentPath.children&&currentPath.children.length>0"
         :class="['page-sub-groups',collapse?'':'expand']"
       >
@@ -30,10 +31,10 @@
             </dl>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <section class="page-news-list-container">
-      <div class="page-news-leftbar">
+      <!-- <div class="page-news-leftbar">
         <dl
           v-if="currentPath.children.length>0"
           class="page-news-leftbar-groups"
@@ -65,17 +66,12 @@
             {{ companyInfo.email }}
           </dd>
         </dl>
-      </div>
+      </div> -->
       <div class="page-news-list">
         <ul>
           <li v-for="item in pageContent.items" :key="item.id">
             <div class="news-date">
-              <span
-                class="news-day"
-              >{{ new Date(item.creationTime).getDate() }}</span>
-              <span
-                class="news-month"
-              >{{ new Date(item.creationTime).getFullYear() }}/{{ new Date(item.creationTime).getMonth()+1 }}</span>
+              <img class="newImg" :src="item.cover">
             </div>
             <div class="news-info">
               <a
@@ -86,7 +82,9 @@
               <p
                 class="news-intro"
                 @click="goNewsDetail(item.id,1)"
-              >{{ filter(item.content,200) }}</p>
+              >{{ filter(item.content, 110) }}
+                <span>[view details]</span></p>
+              <div class="news-date">{{ formatDate( item.creationTime ) }}</div>
             </div>
           </li>
         </ul>
@@ -111,7 +109,7 @@ export default {
     return {
       collapse: true,
       currentPage: 1,
-      perPage: 8,
+      perPage: 10,
       pageContent: {}
     }
   },
@@ -180,7 +178,7 @@ export default {
           typename = 'product'
           break
       }
-      window.open(`/${this.culture}/` + typename + '/detail/' + String(id), '_blank')
+      this.$router.push(`/${this.culture}/` + typename + '/detail/' + String(id))
     },
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)
@@ -195,6 +193,9 @@ export default {
         }
       }
       this.pageContent = await this.$store.dispatch('app/getCatalogList', params)
+    },
+    formatDate(val) {
+      return tools.date(val)
     }
   }
 }

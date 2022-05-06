@@ -1,4 +1,4 @@
-# template-c
+# template-f
 
 ## Build Setup
 

@@ -1,18 +1,7 @@
 <template>
   <section class="home">
     <section class="container">
-      <section v-if="ad1 || (announces && announces.length > 0)" class="ad-announce">
-        <section v-if="ad1" class="ad-block">
-          <div class="ad-content">
-            <h3 class="title">
-              <span class="name">{{ ad1.title }}</span>
-            </h3>
-            <div class="text" v-html="ad1.text"></div>
-            <div class="links">
-              <a :href="ad1.url ? ad1.url : 'javascript:void(0)'" class="button-gray">{{ $L(`More`) }} ></a>
-            </div>
-          </div>
-        </section>
+      <!-- <section v-if="ad1 || (announces && announces.length > 0)" class="ad-announce">
         <section v-if="announces && announces.length > 0" class="announce-block">
           <section class="looper">
             <div v-swiper="announceSwiperOption">
@@ -27,95 +16,122 @@
             </div>
           </section>
         </section>
-      </section>
-      <section v-if="group1 && group1.items.length > 0" class="news-block">
+      </section> -->
+      <section v-if="group1 && group1.children.length > 0" class="news-block">
         <div class="news-list">
           <dl>
             <dt class="block-title">
               <span class="name">{{ group1.title }}</span>
-              <span class="more">
+              <!-- <span class="subtitle">123654</span> -->
+              <!-- <span class="more">
                 <a href="javascript:void(0)" @click="goNewsGroup(group1.catalogGroupId, group1.type)"
                   >{{ $L('More') }} ></a
                 >
-              </span>
+              </span> -->
             </dt>
-            <dd v-for="item in group1.items" :key="item.id">
-              <a class="gray" href="javascript:void(0)" @click="goNewsDetail(item.id, group1.type)">{{ item.title }}</a>
-              <i>{{ formatDate(item.creationTime) }}</i>
-              <p>{{ filter(item.content, 200) }}</p>
+            <dd v-for="item in group1.children" :key="item.id">
+              <img class="backimg" :src="item.cover">
+              <div class="body"
+                @click="goNewsDetail(item.id, group1.type)">
+                <img class="icon" :src="item.icon">
+                <span class="name">{{ item.displayName }}</span>
+              </div>
             </dd>
           </dl>
         </div>
       </section>
     </section>
+    <section class="container">
+      <section v-if="companyInfo" class="companyInfo-block">
+        <div class="companyInfo-list">
+          <dl>
+            <dt class="block-title">
+              <span class="name">{{ 'about' }}</span>
+              <!-- <span class="subtitle">123654</span> -->
+            </dt>
+            <dd class="imgList">
+              <div v-for="(item, index) in htmlImgsList(companyInfo.content)"
+                :key="index">
+                <img :src="item"
+                  @click="goAbout()">
+              </div>
+            </dd>
+            <dd class="text">
+              <div v-html="filter(companyInfo.content, 1000)"></div>
+            </dd>
+          </dl>
+        </div>
+      </section>
+    </section>
+    <section v-if="ad1" class="ad-img-block">
+      <!-- <h3 class="title">
+        <span class="name">{{ ad1.title }}</span>
+      </h3> -->
+      <a :href="ad1.url ? ad1.url : 'javascript:void(0)'" class="img-url">
+        <img :src="ad1.img" />
+      </a>
+    </section>
     <section v-if="group2 && group2.items.length > 0" class="picnews-block">
-      <!-- <h3 class="block-title">
-        <span class="name">{{ group2.title }}</span>
-        <span class="more">
-          <a
-            href="javascript:void(0)"
-            @click="goNewsGroup(group2.catalogGroupId,group2.type)"
-          >{{ $L('More') }} ></a>
-        </span>
-      </h3>-->
       <section class="container">
+        <h3 class="block-title">
+          <span class="name">{{ group2.title }}</span>
+        </h3>
         <section class="looper">
-          <client-only>
-            <div v-swiper:group2Swipper="swiperOption">
-              <div class="swiper-wrapper position-relative">
-                <div
-                  v-for="item in group2.items"
-                  :key="item.id"
-                  :data-index="item.id"
-                  :data-group="group2.type"
-                  class="swiper-slide"
-                >
-                  <img :src="item.cover" />
-                  <div class="slide-info">
-                    <a>{{ item.title }}</a>
-                  </div>
-                </div>
+          <div class="page-news-list">
+            <div
+              v-for="item in group2.items"
+              :key="item.id"
+              class="page-news-item"
+            >
+              <div class="news-date">
+                <img class="newImg" :src="item.cover">
+              </div>
+              <div class="news-info">
+                <a class="news-title" href="javascript:void(0)" @click="goNewsDetail(item.id, 1)">{{ item.title }}</a>
+                <p class="news-intro" @click="goNewsDetail(item.id, 1)">
+                  {{ filter(item.content, 140) }}
+                  <span>[view details]</span>
+                </p>
+                <div class="news-date">{{ formatDate( item.creationTime ) }}</div>
               </div>
             </div>
-          </client-only>
+            <span class="tomore">
+              <a href="javascript:void(0)" @click="goNewsGroup(group2.catalogGroupId, group2.type)">{{ $L('More') }} ></a>
+            </span>
+          </div>
         </section>
       </section>
     </section>
-    <section class="container">
-      <section v-if="group3" class="product-block">
-        <h3 class="block-title">
-          <span class="name">{{ group3.title }}</span>
-          <span class="more">
-            <a href="javascript:void(0)" @click="goNewsGroup(group3.catalogGroupId, group3.type)">{{ $L('More') }} ></a>
-          </span>
-        </h3>
-        <ul>
-          <li v-for="item in group3.children" :key="item.id" @click="goNewsGroup(item.id, group3.type)">
-            <div class="product-icon-container">
-              <div class="product-icon">
-                <img :src="item.icon" />
-              </div>
-              <div class="product-cover">
-                <span>
-                  <img :src="item.cover" />
-                </span>
-              </div>
-              <div class="product-info">
-                <h4>{{ item.displayName }}</h4>
-                <p>{{ item.info }}</p>
-              </div>
+    <!-- <section v-if="group3" class="product-block">
+      <h3 class="block-title">
+        <span class="name">{{ group3.title }}</span>
+      </h3>
+      <ul>
+        <li v-for="item in group3.children" :key="item.id" @click="goNewsGroup(item.id, group3.type)">
+          <div class="product-icon-container">
+            <div class="product-icon">
+              <img :src="item.icon" />
             </div>
-          </li>
-        </ul>
-      </section>
-      <section v-if="ad2" class="ad-img-block">
-        <h3 class="title">
-          <span class="name">{{ ad2.title }}</span>
-        </h3>
-        <a :href="ad2.url ? ad2.url : 'javascript:void(0)'" class="img-url">
-          <img :src="ad2.img" />
-        </a>
-      </section>
+            <div class="product-cover">
+              <span>
+                <img :src="item.cover" />
+              </span>
+            </div>
+            <div class="product-info">
+              <h4>{{ item.displayName }}</h4>
+              <p>{{ item.info }}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section> -->
+    <section v-if="ad2" class="ad-img-block">
+      <!-- <h3 class="title">
+        <span class="name">{{ ad2.title }}</span>
+      </h3> -->
+      <a :href="ad2.url ? ad2.url : 'javascript:void(0)'" class="img-url">
+        <img :src="ad2.img" />
+      </a>
     </section>
   </section>
 </template>
@@ -147,36 +163,8 @@ export default {
       }
       return option
     },
-    swiperOption() {
-      let that = this
-      let option = {
-        autoplay: { delay: 4000 },
-        loop: true,
-        breakpointsInverse: true,
-        preventClicks: false,
-        breakpoints: {
-          300: {
-            slidesPerView: 2,
-            slidesPerGroup: 2,
-            spaceBetween: 30
-          },
-          768: {
-            slidesPerView: 4,
-            slidesPerGroup: 3,
-            spaceBetween: 30
-          }
-        },
-        on: {
-          click() {
-            const realIndex = this.clickedSlide.dataset.index
-            const group = parseInt(this.clickedSlide.dataset.group)
-            that.goNewsDetail(realIndex, group)
-          }
-        }
-      }
-      return option
-    },
     ...mapState({
+      companyInfo: state => state.app.companyInfo,
       currentPath: state => state.app.currentPath,
       culture: state => state.app.culture,
       partners: state => state.app.partners,
@@ -196,7 +184,7 @@ export default {
     },
     group1() {
       let group1 = this.groups.length > 0 ? this.groups[0] : null
-      if (group1 && group1.items) group1.items = group1.items.slice(0, 6)
+      if (group1 && group1.children) group1.children = group1.children.slice(0, 6)
       return group1
     },
     group2() {
@@ -256,13 +244,32 @@ export default {
           typename = 'product'
           break
       }
-      window.open(`/${this.culture}/` + typename + '/detail/' + String(id), '_blank')
+      this.$router.push({ path: `/${this.culture}/` + typename + '/' + String(id) })
+    },
+    goAbout() {
+      this.$router.push({ path: `/${this.culture}/About` })
     },
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)
     },
     formatDate(val) {
       return tools.date(val)
+    },
+    htmlImgsList(str) {
+      //匹配图片（g表示匹配所有结果i表示区分大小写）
+      let imgReg = /<img.*?(?:>|\/>)/gi
+      //匹配src属性 
+      let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i
+      let arr = str.match(imgReg)
+      const list = []
+      for (let i = 0; i < arr.length; i++) {
+        let src = arr[i].match(srcReg)
+        //获取图片地址
+        if (src[1]) {
+          list.push(src[1])
+        }
+      }
+      return list.slice(0, 4)
     }
   }
 }

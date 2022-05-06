@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <h6 class="page-title">
+      <span class="name">{{ currentPath.displayName }}</span>
+      <!-- <span class="subtitle">/{{ 'introduction' }}</span> -->
+    </h6>
     <div class="page-content limit-width" v-html="companyInfo.content"></div>
   </div>
 </template>

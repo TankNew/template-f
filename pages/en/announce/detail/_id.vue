@@ -1,11 +1,16 @@
 <template>
   <section class="container">
-    <h4 class="page-title">
-      <span>{{ announce.title }}</span>
-    </h4>
-    <h6 class="page-sub-title">{{ formatDate(announce.creationTime) }}</h6>
-    <div class="page-content limit-width">
-      <div class="news-detail" v-html="announce.content"></div>
+    <div class="page-news-detail-container">
+      <div class="page-news-detail-content">
+        <h4 class="page-detail-title">
+          <span>{{ announce.title }}</span>
+        </h4>
+        <h6 class="page-sub-title">
+          <span>{{ formatDate(announce.creationTime) }}</span>
+        </h6>
+        <hr class="page-sub-hr">
+        <div class="news-detail" v-html="announce.content"></div>
+      </div>
     </div>
   </section>
 </template>

@@ -1,22 +1,26 @@
 <template>
   <div class="container">
     <div class="page-news-detail-container">
-      <div class="page-news-detail-leftbar">
+      <!-- <div class="page-news-detail-leftbar">
         <dl>
           <dt>{{ catalogItem.catalogGroup.displayName }}</dt>
           <dd v-for="item in catelogItems.items" :key="item.id">
             <a href="javascript:void(0)" @click="goNewsDetail(item.id, 1)">{{ item.title }}</a>
           </dd>
         </dl>
-      </div>
+      </div> -->
       <div class="page-news-detail-content">
         <h4 class="page-detail-title">
           <span>{{ catalogItem.title }}</span>
         </h4>
-        <h6 class="page-sub-title">{{ formatDate(catalogItem.creationTime) }}</h6>
+        <h6 class="page-sub-title">
+          <span>Release time：{{ formatDate(catalogItem.creationTime) }}</span>
+          <span>source：{{ companyInfo.appName }}</span>
+        </h6>
+        <hr class="page-sub-hr">
         <div class="page-content limit-width">
           <div class="news-detail">
-            <div v-if="catalogItem.pictureWithInfos.length > 0 && isloaded" v-swiper:mySwiper="swiperOption">
+            <!-- <div v-if="catalogItem.pictureWithInfos.length > 0 && isloaded" v-swiper:mySwiper="swiperOption">
               <div class="swiper-wrapper">
                 <div v-for="slide in catalogItem.pictureWithInfos" :key="slide.id" class="swiper-slide">
                   <img :src="slide.picUrl" />
@@ -29,7 +33,7 @@
               <div class="swiper-pagination"></div>
               <div slot="button-prev" class="swiper-button-prev"></div>
               <div slot="button-next" class="swiper-button-next"></div>
-            </div>
+            </div> -->
             <div v-html="catalogItem.content"></div>
           </div>
         </div>

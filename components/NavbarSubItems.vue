@@ -1,24 +1,28 @@
 <template>
-  <div v-show="expand" :class="['navbar','sub',expand?'expand':'']">
-    <ul>
+  <div :class="['navbar','sub',expand?'expand':'']"
+    :style="!pc && expand ? 'max-height: ' + ((arry.length + num) * 33) + 'px;' :
+      (pc && expand ? 'max-height: ' + ((arry.length + num) * 50 + 2) + 'px;' : '')">
+    <ul> 
       <li
         v-for="(item,index) in arry"
         :key="index"
         @click.stop.prevent="expandItem(item,index)"
+        @mouseover="changeExpandItem(item,index)"
+        @mouseout="changeExpandItem(item,index)"
       >
-        <a class="nav-link white" @click.stop.prevent="go(item,index)">
+        <a class="nav-link">
+          <span @click.stop.prevent="go(item,index)">{{ item.displayName }}</span>
           <span
             v-if="hasChildren(item)"
             :class="['expand-icon',item.expand?'expand':'']"
-            @click.stop.prevent="expandItem(item,index)"
           >
-            <i class="fas fa-caret-right"></i>
+            <i class="fas fa-angle-left"></i>
           </span>
-          <span>{{ item.displayName }}</span>
         </a>
         <navbar-sub-items
           v-if="hasChildren(item)"
           :items="item.children"
+          :pc="pc"
           :expand="item.expand"
           v-bind="$attrs"
           v-on="$listeners"
@@ -32,7 +36,8 @@ export default {
   name: 'NavbarSubItems',
   data() {
     return {
-      arry: []
+      arry: [],
+      num: 0
     }
   },
   props: {
@@ -41,6 +46,10 @@ export default {
       required: true
     },
     expand: {
+      type: Boolean,
+      default: false
+    },
+    pc: {
       type: Boolean,
       default: false
     }
@@ -73,13 +82,36 @@ export default {
     hasChildren(item) {
       return item.children.length > 0
     },
+    changeNum(bool, n) {
+      if (bool) {
+        this.num += n
+        if (this.$parent.changeNum) {
+          this.$parent.changeNum(bool, this.num)
+        }
+      } else {
+        if (this.$parent.changeNum) {
+          this.$parent.changeNum(bool, this.num)
+        }
+        this.num -= n
+      }
+    },
     expandItem(item, index) {
       if (this.hasChildren(item)) {
-        item.expand = !item.expand
+        if (!this.pc)
+          item.expand = !item.expand
+        this.changeNum(item.expand, item.children.length)
         /* 触发视图响应 */
         this.$set(this.arry, index, item)
       } else {
         this.routerUrl(item)
+      }
+    },
+    changeExpandItem(item, index) {
+      if (this.pc) {
+        if (this.hasChildren(item)) {
+          item.expand = !item.expand
+          // this.changeNum(item.expand, item.children.length)
+        }
       }
     },
     routerUrl(item) {

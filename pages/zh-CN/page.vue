@@ -4,7 +4,8 @@
       <span
         class="name"
       >{{ currentPath!==null?currentPath.displayName:currentPathParent.displayName }}</span>
-      <span class="more"></span>
+      <!-- <span class="subtitle">/{{ '' }}</span> -->
+      <!-- <span class="more"></span> -->
     </h4>
     <nuxt-child />
   </div>

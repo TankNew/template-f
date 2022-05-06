@@ -1,88 +1,138 @@
 // out: false
 footer {
-  background-color: @color-primary;
   color: @color-white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  line-height: 2.6rem;
-  .contact-info {
-    padding: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    .contact-info-company {
-      display: none;
+  position: relative;
+  .font-info{
+    position: relative;
+    width: 100%;
+    .footbg{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: hsla(@color-primary-dark-hsl, 0.7);
     }
-    .contact-info-contact {
+    .info{
+      background-color: hsla(@color-primary-dark-hsl, .9);
+      position: relative;
       display: flex;
-      justify-content: flex-start;
       flex-direction: column;
-      align-items: flex-start;
-      span {
-        margin-right: 0.2rem;
+      align-items: center;
+      padding: 20px 15px;
+      .logo{
+        height: 100px;
+        max-height: 34px;
+        transition: all 0.2s;
+        @media @tablet{
+          max-height: 42px;
+        }
+      }
+      .bodydata{
+        width: 100%;
+        margin: auto;
+        .left{
+          .item{
+            line-height: 18px;
+            font-size: 14px;
+            margin-top: 11px;
+            &:first-child{
+              margin-top: 0;
+            }
+            i {
+              font-size: 12px;
+              margin-right: 10px;
+              display: inline-block;
+              border-radius: 50%;
+              border: 1px solid @color-white;
+              padding: 4px;
+            }
+          }
+        }
+        .right{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .wechat{
+            width: 92px;
+            height: 92px;
+          }
+          span{
+            display: inline-block;
+            margin-top: 8px;
+          }
+        }
+        transition: all 0.2s;
+        @media @tablet{
+          max-width: @min-width;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .left{
+            margin-left: -15px;
+            .item {
+              line-height: 24px;
+              font-size: 18px;
+            }
+          }
+          .right{
+            margin-right: -15px;
+          }
+        }
+        @media @min-desktop {
+          max-width: 1060px;
+        }
+      }
+      .faith {
+        margin-top: 15px;
+        height: 18px;
+        transition: all 0.2s;
+        @media @tablet{
+          height: 30px;
+        }
       }
     }
   }
   .icp {
-    padding: 2rem;
+    margin-top: 15px;
+    font-size: 14px;
+    transition: all 0.2s;
+    @media @tablet{
+      font-size: 16px;
+    }
     dl {
-      margin-bottom: 0;
-      dt {
+      margin-bottom: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: wrap;
+      .dt {
         font-weight: normal;
+        margin-bottom: 5px;
+      }
+      .dt.div {
+        display: flex;
+        justify-content: center;
       }
       dd {
         margin: 0;
+        padding: 0 15px;
       }
     }
   }
-  @media (min-width: 992px) {
-    .contact-info {
-      display: flex;
-      width: 100%;
-      .contact-info-company {
-        display: block;
-        width: 40%;
-        .logo > img {
-          height: 3rem;
-        }
-        .company-name {
-          font-weight: bold;
-        }
-      }
-      .contact-info-contact {
-        width: 60%;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        border-bottom: none;
-        .email {
-          width: 50%;
-        }
-        .tel {
-          width: 50%;
-        }
-        .address {
-          width: 100%;
-        }
-      }
-    }
-    .icp {
-      dl {
-        margin-bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        text-align: center;
-        dt {
-          width: 100%;
-        }
-        dd {
-          padding: 1rem;
-          margin: 0 1rem;
-        }
-      }
-    }
-  }
+  
+  // @media @max-tablet{
+  //   display: none;
+  // }
+  // @media @tablet and @max-desktop{
+  //   padding: 0.7rem 0;
+  //   .phone{
+  //     max-width: @min-width;
+  //   }
+  // }
+  // @media @min-desktop {
+  //   padding: 1.2rem 0;
+  //   .phone{
+  //     max-width: @max-width;
+  //   }
+  // }
 }

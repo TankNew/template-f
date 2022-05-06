@@ -2,6 +2,22 @@
   <div class="body-container">
     <!-- 头部 -->
     <header :class="currentPath.navbarType !== 5 ? 'sub' : ''" @click="closeNavbar">
+      <div class="topheader">
+        <div class="phone">
+          <a class="lang"
+            @click.stop="weixinExpand">
+            <i class="fab fa-weixin"></i>
+          </a>
+          <a class="lang"
+            @click="changeLanguage('zh-CN')">
+            <i class="fas fa-language"></i>
+          </a>
+          <a v-if="companyInfo && companyInfo.tel" :href="'tel:' + companyInfo.tel">
+            <i class="fas fa-phone-alt"></i>
+            <span class="number">{{ companyInfo.tel }}</span>
+          </a>
+        </div>
+      </div>
       <div class="container">
         <div class="header-main">
           <a class="back-link" @click="back">
@@ -12,15 +28,15 @@
             <div class="logo">
               <img :src="companyInfo.logo" @click="go('/')" />
             </div>
-            <div class="company-name">{{ companyInfo.logoText }}</div>
+            <!-- <div class="company-name">{{ companyInfo.logoText }}</div> -->
           </div>
           <div class="header-tools">
             <ul>
-              <li>
+              <!-- <li>
                 <a :href="'tel:' + companyInfo.tel">
                   <i class="fas fa-phone-alt"></i>
                 </a>
-              </li>
+              </li> -->
               <li>
                 <a href="javascript:void(0)" @click.stop="weixinExpand">
                   <i class="fab fa-weixin"></i>
@@ -39,33 +55,33 @@
             </ul>
           </div>
         </div>
-        <div v-if="wxShow" class="wexin-dropdown">
-          <div class="code">
-            <img :src="companyInfo.weixinBarCode" />
-            <h6>扫一扫，直接在手机上打开</h6>
-            <p>推荐微信、QQ扫一扫等扫码工具</p>
-          </div>
-          <span class="close" @click="wxShow = false">
-            <i class="fas fa-times"></i>
-          </span>
+      </div>
+      <div v-if="wxShow" class="wexin-dropdown">
+        <div class="code">
+          <img :src="companyInfo.weixinBarCode" />
+          <h6>扫一扫，直接在手机上打开</h6>
+          <p>推荐微信、QQ扫一扫等扫码工具</p>
         </div>
+        <span class="close" @click="wxShow = false">
+          <i class="fas fa-times"></i>
+        </span>
       </div>
     </header>
     <navbar ref="navbar" :items="navbars"></navbar>
     <section class="main">
-      <!-- banner -->
+      <!-- banner --> 
       <div :class="['banner', currentPath.navbarType !== 5 ? 'sub' : '']">
         <client-only>
           <div v-swiper:bannerSwiper="swiperOption">
             <div class="swiper-wrapper position-relative">
               <div v-for="(item, index) in bannerImgs" :key="index" class="swiper-slide">
                 <img :src="getImgUrl(item.imgUrl)" />
-                <div class="carousel-caption">
+                <!-- <div class="carousel-caption">
                   <div :class="currentFontPosition(item)">
                     <h2>{{ item.title }}</h2>
                     <p>{{ item.subTitle }}</p>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div slot="button-prev" class="swiper-banner-prev"></div>
@@ -73,6 +89,21 @@
             <div class="swiper-pagination"></div>
           </div>
         </client-only>
+        
+        <div v-if="!currentPath.isHome && breadCrumbItems && breadCrumbItems.length > 1" class="breadCrumb-container">
+          <div class="container">
+            <bread-crumb :items="breadCrumbItems"></bread-crumb>
+            <div class="path-bor">
+              <div v-for="(item,index) in currentPathBrother"
+                :key="index"
+                class="item"
+                :class="item.url === currentPath.url ? 'action' : ''"
+                @click="go(item.url)">
+                <span>{{ item.displayName }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div v-if="isDevelopment" class="development">
         <ul>
@@ -84,42 +115,65 @@
           </li>
         </ul>
       </div>
-      <div v-if="!currentPath.isHome" class="breadCrumb-container">
-        <div class="container">
-          <bread-crumb :items="breadCrumbItems"></bread-crumb>
-        </div>
-      </div>
       <nuxt-child ref="main" />
     </section>
     <footer>
-      <div class="container icp">
-        <dl>
-          <dt>
-            Copyright
-            <i class="far fa-copyright"></i>
-            2019-{{ year }}
-            {{ companyInfo.appName }}
-          </dt>
-          <dd v-for="item in companyInfo.icps" :key="item.id">
-            <a class="gongan white" target="_blank" href="http://beian.miit.gov.cn/publish/query/indexFirst.action">
-              <span>津ICP备{{ item }}</span>
-            </a>
-          </dd>
-          <dd v-for="item in companyInfo.gongAns" :key="item.id">
-            <a
-              :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${item}`"
-              class="gongan white"
-              target="_blank"
-            >
-              <img src="@/assets/imgs/gongan.png" />
-              <span>津公网安备{{ item }}号</span>
-            </a>
-          </dd>
-          <dd>
-            技术支持：
-            <a href="http://www.ednet.cn" class="white" target="_blank">e德互联</a>
-          </dd>
-        </dl>
+      <div v-if="companyInfo" class="font-info">
+        <!-- <img class="footbg" src="@/assets/imgs/tm-footer-bg.jpg"> -->
+        <div class="info">
+          <img v-if="companyInfo.logo" class="logo" :src="companyInfo.logo">
+          <div class="bodydata">
+            <div class="left">
+              <div class="item">
+                <i class="fas fa-phone-alt"></i>
+                {{ companyInfo.tel }}</div>
+              <div class="item">
+                <i class="fas fa-location-arrow"></i>
+                {{ companyInfo.appAddress }}</div>
+              <div class="item">
+                <i class="fas fa-envelope"></i>
+                {{ companyInfo.email }}</div>
+            </div>
+            <div v-if="companyInfo.weixinBarCode" class="right">
+              <img class="wechat" :src="companyInfo.weixinBarCode">
+              <span>wechat</span>
+            </div>
+          </div>
+          <!-- <img class="faith" src="@/assets/imgs/tm-footer-adtxt.png" alt=""> -->
+          <div class="container icp">
+            <dl>
+              <dt class="dt">
+                Copyright
+                <i class="far fa-copyright"></i>
+                2019-{{ year }}
+                {{ companyInfo.appName }}
+              </dt>
+              <div v-if="companyInfo.icps" class="dt div">
+                <dd v-for="item in companyInfo.icps" :key="item.id">
+                  <a class="gongan white" target="_blank" href="http://beian.miit.gov.cn/publish/query/indexFirst.action">
+                    <span>津ICP备{{ item }}</span>
+                  </a>
+                </dd>
+              </div>
+              <div v-if="companyInfo.gongAns" class="dt div">
+                <dd v-for="item in companyInfo.gongAns" :key="item.id">
+                  <a
+                    :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${item}`"
+                    class="gongan white"
+                    target="_blank"
+                  >
+                    <img src="@/assets/imgs/gongan.png" />
+                    <span>津公网安备{{ item }}号</span>
+                  </a>
+                </dd>
+              </div>
+              <dt class="dt">
+                技术支持：
+                <a href="http://www.ednet.cn" class="white" target="_blank">e德互联</a>
+              </dt>
+            </dl>
+          </div>
+        </div>
       </div>
     </footer>
   </div>
@@ -155,6 +209,9 @@ export default {
           nextEl: '.swiper-banner-next',
           prevEl: '.swiper-banner-prev'
         },
+        autoplay: {
+          delay: 6000
+        },
         loop: true,
         autoHeight: true,
         on: {
@@ -173,6 +230,7 @@ export default {
       navbars: state => state.app.navbars.slice(0, 8),
       currentPath: state => state.app.currentPath,
       currentPathParent: state => state.app.currentPathParent,
+      currentPathBrother: state => state.app.currentPathBrother,
       breadCrumbItems: state => state.app.breadCrumbItems
     }),
     bannerImgs: {

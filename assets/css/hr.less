@@ -1,0 +1,116 @@
+// out: false
+.container.page-hr{
+  position: relative;
+  // max-width: unset;
+  padding: 0;
+
+
+  .page-content{
+    padding: 2rem 1.5rem;
+    // .hr{
+
+    // }
+  }
+  transition: all 0.2s;
+  @media @tablet{
+    .page-content{
+      padding: 5rem 1.5rem;
+    }
+  }
+}
+.hr {
+  ul {
+    li {
+      margin-top: 20px;
+      &:first-child {
+        margin-top: 0;
+      }
+      .headHr {
+        background-color: #f4f4f4;
+        padding: 0 15px;
+        box-sizing: border-box;
+        color: #b3b3b3;
+        position: relative;
+        cursor: pointer;
+        user-select: text;
+        .info{
+          width: 100%;
+          display: inline-block;
+          box-sizing: border-box;
+          padding: 10px 40px 10px 0;
+        }
+        span {
+          display: inline-block;
+          font-size: 16px;
+          line-height: 22px;
+        }
+        .name{
+          width: calc(80% - 2px);
+          font-weight: bold;
+        }
+        .num-people {
+          width: calc(20% - 2px);
+          text-align: right;
+        }
+        .date{
+          width: calc(80% - 2px);
+          font-size: 16px;
+          line-height: 22px;
+          letter-spacing: 1px;
+        }
+        i{
+          position: absolute;
+          right: 20px;
+          font-size: 20px;
+          top: 50%;
+          transform: translate(0, -50%);
+        }
+      }
+      .bodyHr {
+        padding: 0px 15px;
+        border: 0px solid #ddd;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.2s;
+      }
+      &.active {
+        .headHr {
+          background-color: @new-hover-color;
+          color: #fff;
+          i {
+            transform: scaleY(-1) translate(0, 50%);
+          }
+        }
+        .bodyHr {
+          max-height: unset;
+          overflow: inherit;
+          padding: 13px 15px;
+          border: 1px solid #ddd;
+          border-top: 0;
+        }
+      }
+      @media @tablet{
+        margin-top: 30px;
+        .headHr {
+          span {
+            font-size: 18px;
+            line-height: 40px;
+          }
+          .name{
+            width: calc(33% - 2px);
+            font-weight: bold;
+          }
+          .num-people {
+            width: calc(33% - 2px);
+            text-align: left;
+          }
+          .date{
+            width: calc(33% - 2px);
+            font-size: 18px;
+            line-height: 40px;
+          }
+        }
+      }
+    }
+  }
+}

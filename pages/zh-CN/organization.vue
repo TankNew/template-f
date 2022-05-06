@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="page-content">
+    <div class="page-content page-organization">
       <tree :items="items"></tree>
     </div>
   </div>

@@ -27,7 +27,8 @@
               <p
                 class="news-intro"
                 @click="target(item.id,1)"
-              >{{ filter(item.content,200) }}</p>
+              >{{ filter(item.content,110) }}
+              <span>[查看详情]</span></p>
             </div>
           </li>
         </ul>
@@ -69,7 +70,7 @@ export default {
   },
   methods: {
     target(id) {
-      window.open(`/${this.culture}/announce/detail/` + String(id, '_blank'))
+      this.$router.push({ path: `/${this.culture}/announce/detail/` + String(id, '_blank') })
     },
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)

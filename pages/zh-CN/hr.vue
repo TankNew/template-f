@@ -1,24 +1,30 @@
 <template>
-  <div class="container">
+  <div class="container page-hr">
+    <!-- <h4 class="page-title">
+      <span class="name">{{ currentPath.displayName }}</span>
+      <span class="more"></span>
+    </h4> -->
     <div class="page-content">
-      <div class="honor-list">
+      <div class="hr">
         <ul>
           <li
             v-for="(item, index) in pageContent.items"
             :key="item.id"
-            :style="'animation-delay:' + index * 0.5 + 's;'"
+            :class="num === index?'active':''"
           >
-            <span class="img-container">
-              <img :src="item.miniCover" />
-            </span>
-            <a href="javascript:void(0)" class="gray">
-              <span>{{ item.title }}</span>
-            </a>
-            <i
-              >{{ formatDate(item.startDate) }}{{ formatDate(item.startDate)!=null
-                && formatDate(item.endDate)!==null ? ' 一 ' : ''
-              }}{{ formatDate(item.endDate) }}</i
-            >
+            <div class="headHr"
+              @click="changeNum(index)">
+              <div class="info">
+                <span class="name">{{ item.name }}</span>
+                <span class="num-people">{{ item.requireMembers }}人</span>
+                <span class="date">{{ formatDate( item.lastModificationTime ) }}</span>
+              </div>
+              <i class="fas fa-angle-double-down"></i>
+            </div>
+            <div class="bodyHr">
+              <div v-html="item.description"></div>
+              <div v-html="item.requireMent"></div>
+            </div>
           </li>
         </ul>
       </div>
@@ -36,14 +42,14 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import tools from '../../utiltools/tools'
-
 const c = 1
-const p = 8
+const p = 10
 export default {
   data() {
     return {
       currentPage: c,
-      perPage: p
+      perPage: p,
+      num: 0
     }
   },
   computed: {
@@ -60,22 +66,27 @@ export default {
         MaxResultCount: p
       }
     }
-    const json = await store.dispatch('app/getHonorList', param)
+    const json = await store.dispatch('app/getHr', param)
+    // console.log(json)
     return { pageContent: json }
   },
+
   created() {},
   methods: {
-    formatDate(val) {
-      return tools.dateOnly(val)
-    },
-    async pageChange() {
+    async pageChange() { 
       const params = {
         params: {
           SkipCount: (this.currentPage - 1) * this.perPage,
           MaxResultCount: this.perPage
         }
       }
-      this.pageContent = await this.$store.dispatch('app/getHonorList', params)
+      this.pageContent = await this.$store.dispatch('app/getHr', params)
+    },
+    changeNum(index) {
+      this.num = this.num === index ? -1 : index
+    },
+    formatDate(val) {
+      return tools.date(val)
     }
   }
 }

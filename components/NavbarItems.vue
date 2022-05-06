@@ -9,15 +9,16 @@
         @mouseenter="pcDropdown(item,index,true)"
         @mouseleave="pcDropdown(item,index,false)"
       >
-        <a class="nav-link white" @click.stop.prevent="go(item,index)">
+        <a class="nav-link"
+          :class="item.expand?'expand-white':''">
+          <span
+            @click.stop.prevent="go(item,index)">{{ item.displayName }}</span>
           <span
             v-if="hasChildren(item)"
             :class="['expand-icon',item.expand?'expand':'']"
-            @click.stop.prevent="changeActiveId(item,index)"
           >
-            <i class="fas fa-caret-right"></i>
+            <i class="fas fa-angle-left"></i>
           </span>
-          <span>{{ item.displayName }}</span>
         </a>
         <navbar-sub-items
           v-if="hasChildren(item)"
