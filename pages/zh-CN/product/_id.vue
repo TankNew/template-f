@@ -5,7 +5,7 @@
       <!-- <span class="subtitle">/{{ '' }}</span> -->
       <!-- <span class="more"></span> -->
     </h4>
-    <section v-if="currentPath"
+    <section v-if="currentPath && currentPath.catalogGroup"
       class="page-product-head"
       v-html="currentPath.catalogGroup.info"></section>
     <section v-if="hasChildren">
@@ -29,9 +29,9 @@
         </ul>
       </div>
     </section>
-    <section v-else>
+    <section v-else-if="pageContent.items && pageContent.items.length">
       <div class="page-product-list">
-        <ul class="123">
+        <ul>
           <li
             v-for="item in pageContent.items"
             :key="item.id"
@@ -48,7 +48,7 @@
             </div>
           </li>
         </ul>
-      </div>
+      </div> 
       <div class="my-5">
         <pagination
           v-model="currentPage"
@@ -102,7 +102,7 @@ export default {
     
     return { pageContent: json, subGroups: subJson }
   },
-  created() {},
+  created() { },
   methods: {
     filter(val, length) {
       return tools.cutString(tools._filter(val), length)

@@ -6,7 +6,7 @@
           <span>{{ announce.title }}</span>
         </h4>
         <h6 class="page-sub-title">
-          <span>{{ formatDate(announce.creationTime) }}</span>
+          <span>Pubdate：{{ formatDate(announce.creationTime) }}</span>
         </h6>
         <hr class="page-sub-hr">
         <div class="news-detail" v-html="announce.content"></div>

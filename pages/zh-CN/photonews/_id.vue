@@ -80,7 +80,11 @@
                 href="javascript:void(0)"
                 @click="goNewsDetail(item.id,2)"
               >{{ item.title }}</a>
-              <p class="news-intro">{{ filter(item.content,300) }}</p>
+              <p class="news-intro">
+                <i style="font-style: normal;" v-html="filter(item.content, 150)"></i>
+                <span>[查看详情]</span>
+              </p>
+              <div class="news-date">{{ formatDate( item.creationTime ) }}</div>
             </div>
           </li>
         </ul>
@@ -90,7 +94,6 @@
           v-model="currentPage"
           :per-page="perPage"
           :total-rows="pageContent.totalCount"
-          
           pills
           @input="pageChange"
         ></pagination>
@@ -190,6 +193,9 @@ export default {
         }
       }
       this.pageContent = await this.$store.dispatch('app/getCatalogList', params)
+    },
+    formatDate(val) {
+      return tools.date(val)
     }
   }
 }

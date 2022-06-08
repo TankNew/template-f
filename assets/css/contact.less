@@ -17,6 +17,12 @@
     position: relative;
     padding: 0rem 1.5rem 2rem;
     margin: 0 auto;
+    .contactus .page-title{
+      margin: 0;
+      text-align: left;
+      margin-bottom: 30px;
+      // transition: all 0.2s;
+    }
   }
   transition: all 0.2s;
   @media @tablet{
@@ -77,6 +83,14 @@
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.6);
   width: 100%;
+  min-height: 310px;
+  transition: all 0.2s;
+  @media (min-width: 600px){
+    min-height: 300px;
+  }
+  @media @tablet{
+    min-height: 420px;
+  }
   ul {
     text-align: left;
     display: flex; 

@@ -15,7 +15,7 @@
         </h4>
         <h6 class="page-sub-title">
           <span>发布时间：{{ formatDate(catalogItem.creationTime) }}</span>
-          <span>来源：{{ companyInfo.appName }}</span>
+          <!-- <span>来源：{{ companyInfo.appName }}</span> -->
         </h6>
         <hr class="page-sub-hr">
         <div class="page-content limit-width">

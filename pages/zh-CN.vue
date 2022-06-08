@@ -85,8 +85,8 @@
                 </div> -->
               </div>
             </div>
-            <div slot="button-prev" class="swiper-banner-prev"></div>
-            <div slot="button-next" class="swiper-banner-next"></div>
+            <div v-if="currentPath.isHome" slot="button-prev" class="swiper-banner-prev"></div>
+            <div v-if="currentPath.isHome" slot="button-next" class="swiper-banner-next"></div>
             <div class="swiper-pagination"></div>
           </div>
         </client-only>
@@ -233,7 +233,10 @@ export default {
       currentPath: state => state.app.currentPath,
       currentPathParent: state => state.app.currentPathParent,
       currentPathBrother: state => state.app.currentPathBrother,
-      breadCrumbItems: state => state.app.breadCrumbItems
+      breadCrumbItems: state => state.app.breadCrumbItems,
+
+
+      culture: state => state.culture
     }),
     bannerImgs: {
       // getter

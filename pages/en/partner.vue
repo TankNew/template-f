@@ -4,7 +4,7 @@
       <span class="name">{{ currentPath.displayName }}</span>
       <span class="more"></span>
     </h4> -->
-    <div class="page-content">
+    <div class="page-content partners-content">
       <div class="partners">
         <ul>
           <li

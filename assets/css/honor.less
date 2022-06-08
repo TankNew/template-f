@@ -1,4 +1,7 @@
 // out: false
+.container .page-content.honor-content {
+  padding-top: 0;
+}
 .honor-list {
   ul {
     display: flex;
@@ -8,7 +11,13 @@
       width: 40%;
       margin-left: 5%;
       margin-right: 5%;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
+      transition: all 0.5s;
+      &:hover {
+        a {
+          color: @new-hover-color;
+        }
+      }
       .img-container {
         height: 86%;
         display: inline-block;
@@ -20,30 +29,33 @@
         }
       }
       a {
+        color: #000000;
+        color: @new-hover-color;
+        &:hover {
+          color: @new-hover-color;
+          text-decoration: none;
+        }
+        &.gray {
+          display: block;
+          padding-top: .5rem;
+        }
         span {
           display: block;
-          padding-left: 1.4rem;
           position: relative;
-          border-bottom: 1px solid @color-gray;
-          &::before {
-            content: '.';
-            position: absolute;
-            top: -0.4rem;
-            height: 100%;
-            left: 0;
-            font-size: 4.8rem;
-            line-height: 0.1rem;
-            color: @color-primary;
-          }
+          // border-bottom: 1px solid @color-gray;
+          text-align: center;
         }
       }
       i {
         font-size: 1rem;
         color: @color-gray;
+        display: block;
+        text-align: center;
+        display: none;
       }
     }
   }
-  transition: all 0.2s;
+  transition: all 0.5s;
   @media (min-width: 580px) {
     ul {
       li {
@@ -58,13 +70,11 @@
       li {
         width: calc(25% - 4rem);
         text-align: center;
-        margin: 2rem 2rem 4rem 2rem;
+        margin: 0rem 2rem 1.5rem 2rem;
         a {
           span {
             padding: 0;
-            &::before {
-              display: none;
-            }
+            font-size: 16px;
           }
         }
       }
@@ -76,7 +86,13 @@
         width: 18%;
         margin-left: 1%;
         margin-right: 1%;
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
+        a {
+          span {
+            padding: 0;
+            font-size: 18px;
+          }
+        }
       }
     }
   }

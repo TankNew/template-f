@@ -41,7 +41,7 @@
         </div>
       </section>
     </section>
-    <section class="container">
+    <section class="container companyInfo-container">
       <section v-if="companyInfo" class="companyInfo-block">
         <div class="companyInfo-list">
           <dl>
@@ -89,7 +89,7 @@
               <div class="news-info">
                 <a class="news-title" href="javascript:void(0)" @click="goNewsDetail(item.id, 1)">{{ item.title }}</a>
                 <p class="news-intro" @click="goNewsDetail(item.id, 1)">
-                  {{ filter(item.content, 140) }}
+                  <i style="font-style: normal;" v-html="filter(item.content, 140)"></i>
                   <span>[view details]</span>
                 </p>
                 <div class="news-date">{{ formatDate( item.creationTime ) }}</div>
@@ -235,7 +235,7 @@ export default {
       let typename
       switch (type) {
         case 1:
-          typename = 'news'
+          typename = 'news/detail'
           break
         case 2:
           typename = 'photonews'

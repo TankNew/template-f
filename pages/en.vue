@@ -84,8 +84,8 @@
                 </div> -->
               </div>
             </div>
-            <div slot="button-prev" class="swiper-banner-prev"></div>
-            <div slot="button-next" class="swiper-banner-next"></div>
+            <div v-if="currentPath.isHome" slot="button-prev" class="swiper-banner-prev"></div>
+            <div v-if="currentPath.isHome" slot="button-next" class="swiper-banner-next"></div>
             <div class="swiper-pagination"></div>
           </div>
         </client-only>

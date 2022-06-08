@@ -67,7 +67,6 @@ export default {
       }
     }
     const json = await store.dispatch('app/getHr', param)
-    // console.log(json)
     return { pageContent: json }
   },
 

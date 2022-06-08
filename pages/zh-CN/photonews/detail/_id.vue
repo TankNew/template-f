@@ -6,7 +6,7 @@
           <span>{{ catalogItem.title }}</span>
         </h4>
         <h6 class="page-sub-title">
-          <span>{{ formatDate(catalogItem.creationTime) }}</span>
+          <span>发布时间：{{ formatDate(catalogItem.creationTime) }}</span>
         </h6>
         <hr class="page-sub-hr">
         
@@ -61,7 +61,11 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
+        autoplay: {
+          delay: 4000
+        },
         autoHeight: true,
+        loop: true,
         on: {
           slideChange() {},
           tap() {}

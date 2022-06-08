@@ -5,7 +5,7 @@
         <span class="name">{{ catalogItem.title }}</span>
         <span
           class="product-detail-date"
-        >{{ formatDate(catalogItem.creationTime) }}</span>
+        >Pubdate：{{ formatDate(catalogItem.creationTime) }}</span>
         <hr class="product-sub-hr">
       </h4>
       <div class="news-detail">

@@ -15,7 +15,7 @@
         </h4>
         <h6 class="page-sub-title">
           <span>Release time：{{ formatDate(catalogItem.creationTime) }}</span>
-          <span>source：{{ companyInfo.appName }}</span>
+          <!-- <span>source：{{ companyInfo.appName }}</span> -->
         </h6>
         <hr class="page-sub-hr">
         <div class="page-content limit-width">

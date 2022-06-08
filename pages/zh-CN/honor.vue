@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <div class="page-content">
+    <!-- <h6 class="page-title">
+      <span class="name">{{ currentPath.displayName }}</span>
+      <span class="subtitle">/{{ 'introduction' }}</span>
+    </h6> -->
+    <div class="page-content honor-content">
       <div class="honor-list">
         <ul>
           <li

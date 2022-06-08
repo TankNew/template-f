@@ -1,16 +1,20 @@
 <template>
   <div class="container page-contactus"
-    @mouseover="mouse = !mouse"
-    @mouseout="mouse = !mouse">
-    <!-- <img class="backImg"
-      src="@/assets/imgs/a6045784fd939284eb864fbf420f26e5.png"
-      :style="mouse?'opacity: 0.9;':''"> -->
+      :style="mapView ? 'background: #000;' : ''"
+      @mouseover="mouse = !mouse"
+      @mouseout="mouse = !mouse">
+    <img v-if="companyInfo.mapImage"
+      class="backImg"
+      :src="companyInfo.mapImage"
+      :style="mouse?'opacity: 0.9;':''"
+      @load="mapView = true"
+      @error="mapView = false">
     <div class="page-content">
-      <h4 class="page-title">
-        <span class="name">{{ currentPath.displayName }}</span>
-        <span class="more"></span>
-      </h4>
       <div class="contactus">
+        <h4 class="page-title">
+          <span class="name">{{ currentPath.displayName }}</span>
+          <span class="more"></span>
+        </h4>
         <ul>
           <!-- <li>
             <label>{{ $L(`CompanyName`) }}</label>
@@ -42,7 +46,8 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      mouse: false
+      mouse: false,
+      mapView: false
     }
   },
   computed: {

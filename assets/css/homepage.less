@@ -342,6 +342,7 @@
       .news-info {
         .news-title {
           color: #595959;
+          color: @new-hover-color;
           font-size: 1.4rem;
           font-weight: bold;
           margin-bottom: 0.5rem;
@@ -372,6 +373,9 @@
       transition: all 0.5s;
       @media @tablet{
         padding: 20px 0;
+        &:first-child {
+          padding-top: 0;
+        }
         .news-date {
           margin-right: 3rem;
           .newImg{
@@ -386,12 +390,12 @@
           }
           .news-intro {
             line-height: 30px;
-            font-size: 18px;
+            font-size: 16px;
           }
           .news-date {
             text-align: right;
             margin-top: 9px;
-            font-size: 18px;
+            font-size: 16px;
           }
         }
       }
@@ -417,6 +421,13 @@
         font-size: 16px;
         color: #595959;
         display: inline-block;
+        transition: all 0.5s;
+        border-color: @new-hover-color;
+        color: @new-hover-color;
+        &:hover {
+          border-color: @new-hover-color;
+          color: @new-hover-color;
+        }
       }
       @media @tablet{
         text-align: right;
@@ -520,6 +531,16 @@
       }
     }
   }
+  .container.companyInfo-container {
+    padding-top: 1rem;
+    transition: all 0.5s;
+    @media @tablet{
+      padding-top: 2rem;
+    }
+    @media @min-desktop{
+      padding-top: 3rem;
+    }
+  }
   .companyInfo-block{
     .companyInfo-list{
       dl {
@@ -561,6 +582,9 @@
         -webkit-box-orient: vertical;
       }
       @media @tablet{
+        .text {
+          margin-bottom: 45px;
+        }
         .imgList {
           div {
             margin: 0 1rem 1rem;

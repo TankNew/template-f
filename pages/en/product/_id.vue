@@ -5,7 +5,7 @@
       <!-- <span class="subtitle">/{{ '' }}</span> -->
       <!-- <span class="more"></span> -->
     </h4>
-    <section v-if="currentPath"
+    <section v-if="currentPath && currentPath.catalogGroup"
       class="page-product-head"
       v-html="currentPath.catalogGroup.info"></section>
     <section v-if="hasChildren">
@@ -29,7 +29,7 @@
         </ul>
       </div>
     </section>
-    <section v-else>
+    <section v-else-if="pageContent.items && pageContent.items.length">
       <div class="page-product-list">
         <ul>
           <li

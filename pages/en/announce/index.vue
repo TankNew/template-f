@@ -27,7 +27,8 @@
               <p
                 class="news-intro"
                 @click="target(item.id,1)"
-              >{{ filter(item.content,110) }}
+              >
+              <i style="font-style: normal;" v-html="filter(item.content,110)"></i>
               <span>[view details]</span></p>
             </div>
           </li>

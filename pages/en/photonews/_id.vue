@@ -80,7 +80,10 @@
                 href="javascript:void(0)"
                 @click="goNewsDetail(item.id,2)"
               >{{ item.title }}</a>
-              <p class="news-intro">{{ filter(item.content,300) }}</p>
+              <p class="news-intro">
+                <i style="font-style: normal;" v-html="filter(item.content,300)"></i>
+                <span>[view details]</span>
+              </p>
             </div>
           </li>
         </ul>

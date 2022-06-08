@@ -7,8 +7,8 @@
         v-for="(item,index) in arry"
         :key="index"
         @click.stop.prevent="expandItem(item,index)"
-        @mouseover="changeExpandItem(item,index)"
-        @mouseout="changeExpandItem(item,index)"
+        @mouseover="changeExpandItem(item, index, true)"
+        @mouseout="changeExpandItem(item, index, false)"
       >
         <a class="nav-link">
           <span @click.stop.prevent="go(item,index)">{{ item.displayName }}</span>
@@ -97,19 +97,23 @@ export default {
     },
     expandItem(item, index) {
       if (this.hasChildren(item)) {
-        if (!this.pc)
+        if (!this.pc) {
           item.expand = !item.expand
+        } else {
+          this.routerUrl(item)
+        }
         this.changeNum(item.expand, item.children.length)
         /* 触发视图响应 */
         this.$set(this.arry, index, item)
+        // 
       } else {
         this.routerUrl(item)
       }
     },
-    changeExpandItem(item, index) {
+    changeExpandItem(item, index, bool) {
       if (this.pc) {
         if (this.hasChildren(item)) {
-          item.expand = !item.expand
+          item.expand = bool
           // this.changeNum(item.expand, item.children.length)
         }
       }

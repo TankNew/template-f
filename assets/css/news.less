@@ -17,7 +17,7 @@
   }
 }
 .page-news-list-container {
-  margin: 1.5rem auto;
+  margin: 2rem auto;
   // padding-left: 0.6rem;
   display: flex;
   flex-direction: row;
@@ -35,18 +35,28 @@
     display: block;
     width: 25%;
   }
+  @media @min-desktop {
+    display: block;
+    width: 240px;
+  }
   dl {
     margin-bottom: 4rem;
     dt {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       padding-bottom: 1rem;
       color: @color-gray;
       border-bottom: 1px solid @color-primary;
       margin-bottom: 1rem;
+      padding-left: 20px;
     }
     dd {
       margin: 0;
       padding-left: 0;
+    }
+    .null{
+      font-size: 15px;
+      padding: 0 10px;
+      color: #999;
     }
     &.page-news-leftbar-groups {
       dd {
@@ -66,8 +76,6 @@
             transform: rotate(-45deg) translateY(-50%);
             border-bottom: 0.1rem solid @color-primary-lighter;
             border-right: 0.1rem solid @color-primary-lighter;
-          }
-          &:hover {
           }
         }
       }
@@ -132,8 +140,10 @@
       }
     }
     .news-info {
+      width: 100%;
       .news-title {
         color: #595959;
+        color: @new-hover-color;
         font-size: 1.4rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
@@ -162,6 +172,9 @@
       }
     }
     transition: all 0.5s;
+    &:first-child {
+      padding-top: 0;
+    }
     @media @tablet{
       padding: 20px 0;
       .news-date {
@@ -178,26 +191,31 @@
         }
         .news-intro {
           line-height: 30px;
-          font-size: 18px;
+          font-size: 16px;
         }
         .news-date {
           text-align: right;
           margin-top: 9px;
-          font-size: 18px;
+          font-size: 16px;
         }
       }
-    }
-    @media @min-desktop {
-
     }
   }
   transition: all 0.5s;
   @media @tablet{
     padding: 0 0rem;
   }
+  .null {
+    font-size: 18px;
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }
 .news-detail {
-  min-height: 20rem;
+  // min-height: 20rem;
   position: relative;
   // max-width: 70rem;
   // padding: 1rem;
@@ -346,7 +364,7 @@
   transition: all 0.2s;
   @media @tablet{
     .page-news-detail-content {
-      padding-top: 30px;
+      padding-top: 0px;
       padding-bottom: 50px;
       .page-detail-title {
         font-size: 2.4rem;
@@ -354,7 +372,6 @@
       .page-sub-title{
         font-size: 1.6rem;
         margin-top: 15px;
-        margin: 0 15px;
       }
       .page-sub-hr{
         margin: 20px 0;

@@ -12,11 +12,10 @@
   -moz-user-select: none;
   transition: all 0.3s;
   @media @max-tablet{
-    margin: 2rem 0;
+    margin: 2rem 0 4rem;
   }
   @media @tablet{
-    margin: 2rem 0;
-    margin-top: 5rem;
+    margin: 5rem 0 6rem;
   }
 }
 .page-item {
@@ -67,8 +66,8 @@
 .page-item.active .page-link {
   z-index: 3;
   color: @color-white;
-  background-color: hsla(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness) + 24%), 1);
-  border-color: hsla(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness) + 24%), 1);
+  background-color: hsla(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness)), 1);
+  border-color: hsla(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness)), 1);
 }
 
 .page-item.disabled .page-link {

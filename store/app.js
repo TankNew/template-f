@@ -208,6 +208,14 @@ const actions = {
   async getHonor(context, params) {
     const res = await this.$axios.get('/api/services/app/Honor/Get', params)
     if (res.data.success) return res.data.result
+  },
+  async getOrganizationUnitUsersList(context, params) {
+    const res = await this.$axios.get('/api/services/app/Organization/GetOrganizationUnitUsers', params)
+    if (res.data.success) return res.data.result
+  },
+  async getUsersId(context, params) {
+    const res = await this.$axios.get('/api/services/app/User/GetUserLessInfo', params)
+    if (res.data.success) return res.data.result
   }
 }
 export default {
