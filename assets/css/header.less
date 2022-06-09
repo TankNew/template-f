@@ -4,7 +4,7 @@ header {
   top: 0;
   width: 100%;
   z-index: 10;
-  color: @color-white;
+  color: @color-primary;
   background-color: @color-white;
   &.sub {
     background-color: @color-white;
@@ -38,25 +38,19 @@ header {
       }
     }
   }
-  .container {
-    position: relative;
-    // padding-top: 1rem;
-    // padding-bottom: 1rem;
-    height: 4.4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    @media @tablet {
-      // height: 8rem;
-      display: none;
-    }
-  }
-  .header-main {
+ 
+  .header-mobile {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0; 
+
+    @media @tablet {
+      // height: 8rem;
+      display: none;
+    }
     .back-link {
       display: none;
       font-size: 1.6rem;
@@ -81,7 +75,6 @@ header {
         }
       }
       .company-name {
-        display: none;
         font-size: 1.8rem;
         font-weight: bold;
         flex-grow: 1;
@@ -168,12 +161,11 @@ header {
     }
   }
 
-
-  .topheader{
+  .header-desktop {
     padding: 1.3rem 0;
     background-color: @color-primary;
     transition: padding 0.2s;
-    .phone{
+    .phone {
       text-align: right;
       margin: 0 auto;
       // max-width: 100%;
@@ -182,18 +174,18 @@ header {
       display: flex;
       justify-content: right;
       align-items: center;
-      & > a{
+      & > a {
         margin-left: 1.5rem;
         color: @color-white;
         display: flex;
         border-radius: 50%;
         justify-content: center;
         align-items: center;
-        &.lang{
+        &.lang {
           // width: 26px;
           // height: 26px;
           // border: 1px solid @color-white;
-          i{
+          i {
             font-size: 14px;
             line-height: 10px;
           }
@@ -208,27 +200,27 @@ header {
         border: 1px solid #fff;
         display: flex;
         justify-content: center;
-        align-items: center;    
+        align-items: center;
       }
-      .number{
+      .number {
         font-size: 1.6rem;
         color: @color-white;
         vertical-align: middle;
-        margin-left: .6rem;
+        margin-left: 0.6rem;
       }
     }
-    @media @max-tablet{
+    @media @max-tablet {
       display: none;
     }
-    @media @tablet{
+    @media @tablet {
       padding: 0.7rem 0;
-      .phone{
+      .phone {
         max-width: @min-width;
       }
     }
     @media @min-desktop {
       padding: 1.2rem 0;
-      .phone{
+      .phone {
         max-width: @max-width;
       }
     }

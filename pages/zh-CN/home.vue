@@ -30,10 +30,9 @@
               </span> -->
             </dt>
             <dd v-for="item in group1.children" :key="item.id">
-              <img class="backimg" :src="item.cover">
-              <div class="body"
-                @click="goNewsDetail(item.id, group1.type)">
-                <img class="icon" :src="item.icon">
+              <img class="backimg" :src="item.cover" />
+              <div class="body" @click="goNewsDetail(item.id, group1.type)">
+                <img class="icon" :src="item.icon" />
                 <span class="name">{{ item.displayName }}</span>
               </div>
             </dd>
@@ -46,18 +45,16 @@
         <div class="companyInfo-list">
           <dl>
             <dt class="block-title">
-              <span class="name">{{ '关于' }}</span>
+              <span class="name">{{ $L('AboutUs') }}</span>
               <!-- <span class="subtitle">123654</span> -->
             </dt>
             <dd class="imgList">
-              <div v-for="(item, index) in htmlImgsList(companyInfo.content)"
-                :key="index">
-                <img :src="item"
-                  @click="goAbout()">
+              <div v-for="(item, index) in htmlImgsList(companyInfo.content)" :key="index">
+                <img :src="item" @click="goAbout()" />
               </div>
             </dd>
             <dd class="text">
-              <div v-html="filter(companyInfo.content, 1000)"></div>
+              <div v-html="filter(companyInfo.content, 120)"></div>
             </dd>
           </dl>
         </div>
@@ -78,58 +75,58 @@
         </h3>
         <section class="looper">
           <div class="page-news-list">
-            <div
-              v-for="item in group2.items"
-              :key="item.id"
-              class="page-news-item"
-            >
+            <div v-for="item in group2.items" :key="item.id" class="page-news-item">
               <div class="news-date">
-                <img class="newImg" :src="item.cover">
+                <img class="newImg" :src="item.cover" />
               </div>
               <div class="news-info">
                 <a class="news-title" href="javascript:void(0)" @click="goNewsDetail(item.id, 1)">{{ item.title }}</a>
                 <p class="news-intro" @click="goNewsDetail(item.id, 1)">
                   <!-- {{  }} -->
-                  <i style="font-style: normal;" v-html="filter(item.content, 140)"></i>
-                  <span>[查看详情]</span>
+                  <i style="font-style: normal" v-html="filter(item.content, 140)"></i>
+                  <span>{{ $L('More') }} </span>
                 </p>
-                <div class="news-date">{{ formatDate( item.creationTime ) }}</div>
+                <div class="news-date">{{ formatDate(item.creationTime) }}</div>
               </div>
             </div>
             <span class="tomore">
-              <a href="javascript:void(0)" @click="goNewsGroup(group2.catalogGroupId, group2.type)">{{ $L('More') }} ></a>
+              <a href="javascript:void(0)" @click="goNewsGroup(group2.catalogGroupId, group2.type)"
+                >{{ $L('More') }} ></a
+              >
             </span>
           </div>
         </section>
       </section>
     </section>
-    <!-- <section v-if="group3" class="product-block">
-      <h3 class="block-title">
-        <span class="name">{{ group3.title }}</span>
-      </h3>
-      <ul>
-        <li v-for="item in group3.children" :key="item.id" @click="goNewsGroup(item.id, group3.type)">
-          <div class="product-icon-container">
-            <div class="product-icon">
-              <img :src="item.icon" />
+    <section v-if="group3" class="product-block">
+      <section class="container">
+        <h3 class="block-title">
+          <span class="name">{{ group3.title }}</span>
+        </h3>
+        <ul>
+          <li v-for="item in group3.children" :key="item.id" @click="goNewsGroup(item.id, group3.type)">
+            <div class="product-icon-container">
+              <div class="product-icon">
+                <img :src="item.icon" />
+              </div>
+              <div class="product-cover">
+                <span>
+                  <img :src="item.cover" />
+                </span>
+              </div>
+              <div class="product-info">
+                <h4>{{ item.displayName }}</h4>
+                <p>{{ item.info }}</p>
+              </div>
             </div>
-            <div class="product-cover">
-              <span>
-                <img :src="item.cover" />
-              </span>
-            </div>
-            <div class="product-info">
-              <h4>{{ item.displayName }}</h4>
-              <p>{{ item.info }}</p>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section> -->
+          </li>
+        </ul>
+      </section>
+    </section>
     <section v-if="ad2" class="ad-img-block">
-      <!-- <h3 class="title">
+      <h3 class="title">
         <span class="name">{{ ad2.title }}</span>
-      </h3> -->
+      </h3>
       <a :href="ad2.url ? ad2.url : 'javascript:void(0)'" class="img-url">
         <img :src="ad2.img" />
       </a>
@@ -185,17 +182,26 @@ export default {
     },
     group1() {
       let group1 = this.groups.length > 0 ? this.groups[0] : null
-      if (group1 && group1.children) group1.children = group1.children.slice(0, 6)
+      if (group1) {
+        if (group1.children) group1.children = group1.children.slice(0, 6)
+        else group1.children = []
+      }
       return group1
     },
     group2() {
       let group2 = this.groups.length > 1 ? this.groups[1] : null
-      if (group2 && group2.items) group2.items = group2.items.slice(0, 6)
+      if (group2) {
+        if (group2.items) group2.items = group2.items.slice(0, 6)
+        else group2.items = []
+      }
       return group2
     },
     group3() {
       let group3 = this.groups.length > 2 ? this.groups[2] : null
-      if (group3 && group3.items) group3.items = group3.items.slice(0, 6)
+      if (group3) {
+        if (group3.items) group3.items = group3.items.slice(0, 6)
+        else group3.items = []
+      }
       return group3
     }
   },
@@ -259,18 +265,20 @@ export default {
     htmlImgsList(str) {
       //匹配图片（g表示匹配所有结果i表示区分大小写）
       let imgReg = /<img.*?(?:>|\/>)/gi
-      //匹配src属性 
+      //匹配src属性
       let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i
       let arr = str.match(imgReg)
       const list = []
       for (let i = 0; i < arr.length; i++) {
-        let src = arr[i].match(srcReg)
-        //获取图片地址
-        if (src[1]) {
-          list.push(src[1])
+        if (i < 4) {
+          let src = arr[i].match(srcReg)
+          //获取图片地址
+          if (src[1]) {
+            list.push(src[1])
+          }
         }
       }
-      return list.slice(0, 4)
+      return list
     }
   }
 }

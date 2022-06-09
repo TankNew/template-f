@@ -2,14 +2,12 @@
   <div class="body-container">
     <!-- 头部 -->
     <header :class="currentPath.navbarType !== 5 ? 'sub' : ''" @click="closeNavbar">
-      <div class="topheader">
+      <div class="header-desktop">
         <div class="phone">
-          <a class="lang"
-            @click.stop="weixinExpand">
+          <a class="lang" @click.stop="weixinExpand">
             <i class="fab fa-weixin"></i>
           </a>
-          <a class="lang"
-            @click="changeLanguage('en')">
+          <a class="lang" @click="changeLanguage('en')">
             <i class="fas fa-language"></i>
           </a>
           <a v-if="companyInfo && companyInfo.tel" :href="'tel:' + companyInfo.tel">
@@ -18,42 +16,40 @@
           </a>
         </div>
       </div>
-      <div class="container">
-        <div class="header-main">
-          <a class="back-link" @click="back">
-            <i class="fas fa-chevron-left"></i>
-            {{ $L(`Back`) }}
-          </a>
-          <div class="header-logo-container">
-            <div class="logo">
-              <img :src="companyInfo.logo" @click="go('/')" />
-            </div>
-            <!-- <div class="company-name">{{ companyInfo.logoText }}</div> -->
+      <div class="header-mobile">
+        <a class="back-link" @click="back">
+          <i class="fas fa-chevron-left"></i>
+          {{ $L(`Back`) }}
+        </a>
+        <div class="header-logo-container">
+          <div class="logo">
+            <img :src="companyInfo.logo" @click="go('/')" />
           </div>
-          <div class="header-tools">
-            <ul>
-              <!-- <li>
+          <div class="company-name">{{ companyInfo.logoText }}</div>
+        </div>
+        <div class="header-tools">
+          <ul>
+            <!-- <li>
                 <a :href="'tel:' + companyInfo.tel">
                   <i class="fas fa-phone-alt"></i>
                 </a>
               </li> -->
-              <li>
-                <a href="javascript:void(0)" @click.stop="weixinExpand">
-                  <i class="fab fa-weixin"></i>
-                </a>
-              </li>
-              <li v-if="multiLangs">
-                <a @click="changeLanguage('en')">
-                  <i class="fas fa-language"></i>
-                </a>
-              </li>
-              <li class="mobile-navbar-trigger">
-                <a href="javascript:void(0)" @click.stop="triggerNavbar">
-                  <i class="fas fa-bars"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
+            <li>
+              <a href="javascript:void(0)" @click.stop="weixinExpand">
+                <i class="fab fa-weixin"></i>
+              </a>
+            </li>
+            <li v-if="multiLangs">
+              <a @click="changeLanguage('en')">
+                <i class="fas fa-language"></i>
+              </a>
+            </li>
+            <li class="mobile-navbar-trigger">
+              <a href="javascript:void(0)" @click.stop="triggerNavbar">
+                <i class="fas fa-bars"></i>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <div v-if="wxShow" class="wexin-dropdown">
@@ -70,19 +66,18 @@
     <navbar ref="navbar" :items="navbars"></navbar>
     <section class="main">
       <!-- banner -->
-      <div :class="['banner', currentPath.navbarType !== 5 ? 'sub' : '',
-        !currentPath.isHome ? 'notHome' : '']">
+      <div :class="['banner', currentPath.navbarType !== 5 ? 'sub' : '', !currentPath.isHome ? 'notHome' : '']">
         <client-only>
           <div v-swiper:bannerSwiper="swiperOption" @ready="handleSwiperReadied">
             <div class="swiper-wrapper position-relative">
               <div v-for="(item, index) in bannerImgs" :key="index" class="swiper-slide">
                 <img :src="getImgUrl(item.imgUrl)" />
-                <!-- <div class="carousel-caption">
+                <div class="carousel-caption">
                   <div :class="currentFontPosition(item)">
                     <h2>{{ item.title }}</h2>
                     <p>{{ item.subTitle }}</p>
                   </div>
-                </div> -->
+                </div>
               </div>
             </div>
             <div v-if="currentPath.isHome" slot="button-prev" class="swiper-banner-prev"></div>
@@ -92,15 +87,16 @@
         </client-only>
         <!-- && breadCrumbItems && breadCrumbItems.length > 1 -->
         <div v-if="!currentPath.isHome" class="breadCrumb-container">
-          <div v-if="breadCrumbItems && breadCrumbItems.length > 1"
-            class="container">
+          <div v-if="breadCrumbItems && breadCrumbItems.length > 1" class="container">
             <bread-crumb :items="breadCrumbItems"></bread-crumb>
             <div class="path-bor">
-              <div v-for="(item,index) in currentPathBrother"
+              <div
+                v-for="(item, index) in currentPathBrother"
                 :key="index"
                 class="item"
                 :class="item.url === currentPath.url ? 'action' : ''"
-                @click="go(item.url)">
+                @click="go(item.url)"
+              >
                 <span>{{ item.displayName }}</span>
               </div>
             </div>
@@ -118,41 +114,45 @@
         </ul>
       </div>
       <nuxt-child ref="main" />
-    </section> 
+    </section>
     <footer>
       <div v-if="companyInfo" class="font-info">
         <!-- <img class="footbg" src="@/assets/imgs/tm-footer-bg.jpg"> -->
         <div class="info">
-          <img v-if="companyInfo.logo" class="logo" :src="companyInfo.logo">
           <div class="bodydata">
             <div class="left">
               <div class="item">
                 <i class="fas fa-phone-alt"></i>
-                {{ companyInfo.tel }}</div>
+                {{ companyInfo.tel }}
+              </div>
               <div class="item">
                 <i class="fas fa-location-arrow"></i>
-                {{ companyInfo.appAddress }}</div>
+                {{ companyInfo.appAddress }}
+              </div>
               <div class="item">
                 <i class="fas fa-envelope"></i>
-                {{ companyInfo.email }}</div>
+                {{ companyInfo.email }}
+              </div>
             </div>
             <div v-if="companyInfo.weixinBarCode" class="right">
-              <img class="wechat" :src="companyInfo.weixinBarCode">
-              <span>微信</span>
+              <img class="wechat" :src="companyInfo.weixinBarCode" />
             </div>
           </div>
-          <!-- <img class="faith" src="@/assets/imgs/tm-footer-adtxt.png" alt=""> -->
           <div class="container icp">
             <dl>
               <dt class="dt">
                 Copyright
                 <i class="far fa-copyright"></i>
-                2019-{{ year }}
+                2020-{{ year }}
                 {{ companyInfo.appName }}
               </dt>
               <div v-if="companyInfo.icps" class="dt div">
                 <dd v-for="item in companyInfo.icps" :key="item.id">
-                  <a class="gongan white" target="_blank" href="http://beian.miit.gov.cn/publish/query/indexFirst.action">
+                  <a
+                    class="gongan white"
+                    target="_blank"
+                    href="http://beian.miit.gov.cn/publish/query/indexFirst.action"
+                  >
                     <span>津ICP备{{ item }}</span>
                   </a>
                 </dd>
@@ -235,7 +235,6 @@ export default {
       currentPathBrother: state => state.app.currentPathBrother,
       breadCrumbItems: state => state.app.breadCrumbItems,
 
-
       culture: state => state.culture
     }),
     bannerImgs: {
@@ -295,8 +294,7 @@ export default {
   },
   mounted() {},
   methods: {
-    handleSwiperReadied(swiper) {
-    },
+    handleSwiperReadied(swiper) {},
     closeNavbar() {
       this.$refs.navbar.close()
     },
@@ -312,7 +310,7 @@ export default {
       this.$router.back(-1)
     },
     changeLanguage(lang) {
-      window.location.href = '/' + lang + '/home'
+      window.location.href = '/' + lang + '/Home'
     },
     ...mapActions({ setcurrentPath: 'app/setcurrentPath' }),
     go(url) {

@@ -26,7 +26,7 @@
           <div class="logo">
             <img :src="companyInfo.logo" @click="go('/')" />
           </div>
-          <!-- <div class="company-name">{{ companyInfo.logoText }}</div> -->
+          <div class="company-name">{{ companyInfo.logoText }}</div>
         </div>
         <navbar-items
           ref="navbarItems"

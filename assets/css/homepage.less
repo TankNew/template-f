@@ -27,18 +27,18 @@
       position: absolute;
       bottom: 0;
     }
-    .subtitle{
+    .subtitle {
       font-size: 14px;
       margin-top: 8px;
       color: #b3b3b3;
     }
     transition: all 0.2s;
-    @media @tablet{
+    @media @tablet {
       margin-bottom: 4.5rem;
       > span {
         font-size: 24px;
       }
-      .subtitle{
+      .subtitle {
         font-size: 16px;
       }
     }
@@ -87,13 +87,14 @@
   }
   .ad-img-block {
     text-align: center;
-    // margin: 2rem 0;
+    margin-top: 10rem;
     .title {
       font-size: 1.8rem;
       padding: 3rem 0;
       position: relative;
       @media @tablet {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
+        margin-bottom: 4rem;
       }
       &::after {
         content: '';
@@ -119,11 +120,9 @@
       display: flex;
       justify-content: center;
       > img {
-        height: 100%;
+        height: 50rem;
         width: 100%;
-        max-height: 500px;
         object-fit: cover;
-        max-width: 2000px;
       }
     }
   }
@@ -218,16 +217,16 @@
         margin-bottom: 1rem;
         border: 1px solid #ccc;
         min-height: 141px;
-        margin-left: .5rem;
-        margin-right: .5rem;
-        // &:nth-child(2n + 1) {
-        //   margin-left: .25rem;
-        //   margin-right: .25rem;
-        // }
-        // &:nth-child(2n + 0) {
-        //   margin-right: .25rem;
-        //   margin-left: .25rem;
-        // }
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        &:nth-child(2n + 1) {
+          margin-left: 0.25rem;
+          margin-right: 0.25rem;
+        }
+        &:nth-child(2n + 0) {
+          margin-right: 0.25rem;
+          margin-left: 0.25rem;
+        }
         i {
           display: block;
         }
@@ -272,7 +271,7 @@
             }
           }
         }
-        .icon{
+        .icon {
           height: 36px;
           display: block;
           margin: auto;
@@ -280,7 +279,7 @@
         transition: all 0.2s;
         @media (min-width: 750px) {
           width: calc(33.3% - 2.5rem);
-          .icon{
+          .icon {
             height: 64px;
             position: absolute;
             left: 5%;
@@ -371,14 +370,14 @@
         }
       }
       transition: all 0.5s;
-      @media @tablet{
+      @media @tablet {
         padding: 20px 0;
         &:first-child {
           padding-top: 0;
         }
         .news-date {
           margin-right: 3rem;
-          .newImg{
+          .newImg {
             width: 190px;
             height: 124px;
           }
@@ -400,11 +399,10 @@
         }
       }
       @media @min-desktop {
-
       }
     }
     transition: all 0.5s;
-    @media @tablet{
+    @media @tablet {
       padding: 0 0rem;
     }
     .tomore {
@@ -429,7 +427,7 @@
           color: @new-hover-color;
         }
       }
-      @media @tablet{
+      @media @tablet {
         text-align: right;
         margin-top: 40px;
         margin-bottom: 40px;
@@ -455,7 +453,6 @@
         flex-direction: row;
         flex-wrap: wrap;
         > li {
-          margin-top: 4rem;
           width: calc(50% - 1rem);
           &:nth-child(2n + 1) {
             margin-right: 1rem;
@@ -534,26 +531,26 @@
   .container.companyInfo-container {
     padding-top: 1rem;
     transition: all 0.5s;
-    @media @tablet{
+    @media @tablet {
       padding-top: 2rem;
     }
-    @media @min-desktop{
+    @media @min-desktop {
       padding-top: 3rem;
     }
   }
-  .companyInfo-block{
-    .companyInfo-list{
+  .companyInfo-block {
+    .companyInfo-list {
       dl {
         margin: 0 15px;
       }
       dd {
         text-align: center;
       }
-      .imgList{
+      .imgList {
         width: 100%;
         div {
           width: calc(50% - 1rem);
-          margin: 0 .5rem 1rem;
+          margin: 0 0.5rem 1rem;
           height: 0;
           padding-top: 30%;
           position: relative;
@@ -569,7 +566,7 @@
           }
         }
       }
-      .text{
+      .text {
         margin: 5px auto 20px;
         max-width: 1080px;
         font-size: 14px;
@@ -581,7 +578,7 @@
         -webkit-line-clamp: 8;
         -webkit-box-orient: vertical;
       }
-      @media @tablet{
+      @media @tablet {
         .text {
           margin-bottom: 45px;
         }
@@ -592,7 +589,7 @@
             padding-top: 17%;
           }
         }
-        .text{
+        .text {
           margin-top: 20px;
           font-size: 18px;
           line-height: 2;
