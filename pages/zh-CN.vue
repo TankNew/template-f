@@ -2,71 +2,64 @@
   <div class="body-container">
     <!-- 头部 -->
     <header :class="currentPath.navbarType !== 5 ? 'sub' : ''" @click="closeNavbar">
-      <div class="header-desktop">
-        <div class="phone">
-          <a class="lang" @click.stop="weixinExpand">
-            <i class="fab fa-weixin"></i>
+      <section class="header-topbar">
+        <div class="container"></div>
+      </section>
+      <section class="container">
+        <div class="header-main">
+          <a class="back-link" @click="back">
+            <i class="fas fa-chevron-left"></i>
+            {{ $L(`Back`) }}
           </a>
-          <a class="lang" @click="changeLanguage('en')">
-            <i class="fas fa-language"></i>
-          </a>
-          <a v-if="companyInfo && companyInfo.tel" :href="'tel:' + companyInfo.tel">
-            <i class="fas fa-phone-alt"></i>
-            <span class="number">{{ companyInfo.tel }}</span>
-          </a>
-        </div>
-      </div>
-      <div class="header-mobile">
-        <a class="back-link" @click="back">
-          <i class="fas fa-chevron-left"></i>
-          {{ $L(`Back`) }}
-        </a>
-        <div class="header-logo-container">
-          <div class="logo">
-            <img :src="companyInfo.logo" @click="go('/')" />
+          <div class="header-logo-container">
+            <div class="logo">
+              <img :src="companyInfo.logo" @click="go('/')" />
+            </div>
+            <div class="company-name">{{ companyInfo.logoText }}</div>
           </div>
-          <div class="company-name">{{ companyInfo.logoText }}</div>
-        </div>
-        <div class="header-tools">
-          <ul>
-            <!-- <li>
-                <a :href="'tel:' + companyInfo.tel">
+          <navbar ref="navbar" :items="navbars"></navbar>
+          <div class="header-tools">
+            <ul>
+              <li>
+                <a v-if="companyInfo && companyInfo.tel" :href="'tel:' + companyInfo.tel">
                   <i class="fas fa-phone-alt"></i>
+                  <span>{{ companyInfo.tel }}</span>
                 </a>
-              </li> -->
-            <li>
-              <a href="javascript:void(0)" @click.stop="weixinExpand">
-                <i class="fab fa-weixin"></i>
-              </a>
-            </li>
-            <li v-if="multiLangs">
-              <a @click="changeLanguage('en')">
-                <i class="fas fa-language"></i>
-              </a>
-            </li>
-            <li class="mobile-navbar-trigger">
-              <a href="javascript:void(0)" @click.stop="triggerNavbar">
-                <i class="fas fa-bars"></i>
-              </a>
-            </li>
-          </ul>
+              </li>
+              <li>
+                <a href="javascript:void(0)" @click.stop="weixinExpand">
+                  <i class="fab fa-weixin"></i>
+                </a>
+              </li>
+              <li v-if="multiLangs">
+                <a @click="changeLanguage('en')">
+                  <i class="fas fa-language"></i>
+                </a>
+              </li>
+              <li class="mobile-navbar-trigger">
+                <a href="javascript:void(0)" @click.stop="triggerNavbar">
+                  <i class="fas fa-bars"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div v-if="wxShow" class="wexin-dropdown">
-        <div class="code">
-          <img :src="companyInfo.weixinBarCode" />
-          <h6>扫一扫，直接在手机上打开</h6>
-          <p>推荐微信、QQ扫一扫等扫码工具</p>
+        <div v-if="wxShow" class="wexin-dropdown">
+          <div class="code">
+            <img :src="companyInfo.weixinBarCode" />
+            <h6>扫一扫，直接在手机上打开</h6>
+            <p>推荐微信、QQ扫一扫等扫码工具</p>
+          </div>
+          <span class="close" @click="wxShow = false">
+            <i class="fas fa-times"></i>
+          </span>
         </div>
-        <span class="close" @click="wxShow = false">
-          <i class="fas fa-times"></i>
-        </span>
-      </div>
+      </section>
     </header>
-    <navbar ref="navbar" :items="navbars"></navbar>
+
     <section class="main">
       <!-- banner -->
-      <div :class="['banner', currentPath.navbarType !== 5 ? 'sub' : '', !currentPath.isHome ? 'notHome' : '']">
+      <div :class="['banner', currentPath.navbarType !== 5 ? 'sub' : '']">
         <client-only>
           <div v-swiper:bannerSwiper="swiperOption" @ready="handleSwiperReadied">
             <div class="swiper-wrapper position-relative">
@@ -103,7 +96,7 @@
           </div>
         </div>
       </div>
-      <div v-if="isDevelopment" class="development">
+      <div v-if="isDevelopment" class="dev-tools">
         <ul>
           <li v-for="item in themes" :key="item.displayName">
             <a
@@ -116,66 +109,56 @@
       <nuxt-child ref="main" />
     </section>
     <footer>
-      <div v-if="companyInfo" class="font-info">
-        <!-- <img class="footbg" src="@/assets/imgs/tm-footer-bg.jpg"> -->
-        <div class="info">
-          <div class="bodydata">
-            <div class="left">
-              <div class="item">
-                <i class="fas fa-phone-alt"></i>
-                {{ companyInfo.tel }}
-              </div>
-              <div class="item">
-                <i class="fas fa-location-arrow"></i>
-                {{ companyInfo.appAddress }}
-              </div>
-              <div class="item">
-                <i class="fas fa-envelope"></i>
-                {{ companyInfo.email }}
-              </div>
-            </div>
-            <div v-if="companyInfo.weixinBarCode" class="right">
-              <img class="wechat" :src="companyInfo.weixinBarCode" />
-            </div>
-          </div>
-          <div class="container icp">
-            <dl>
-              <dt class="dt">
-                Copyright
-                <i class="far fa-copyright"></i>
-                2020-{{ year }}
-                {{ companyInfo.appName }}
-              </dt>
-              <div v-if="companyInfo.icps" class="dt div">
-                <dd v-for="item in companyInfo.icps" :key="item.id">
-                  <a
-                    class="gongan white"
-                    target="_blank"
-                    href="http://beian.miit.gov.cn/publish/query/indexFirst.action"
-                  >
-                    <span>津ICP备{{ item }}</span>
-                  </a>
-                </dd>
-              </div>
-              <div v-if="companyInfo.gongAns" class="dt div">
-                <dd v-for="item in companyInfo.gongAns" :key="item.id">
-                  <a
-                    :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${item}`"
-                    class="gongan white"
-                    target="_blank"
-                  >
-                    <img src="@/assets/imgs/gongan.png" />
-                    <span>津公网安备{{ item }}号</span>
-                  </a>
-                </dd>
-              </div>
-              <dt class="dt">
-                技术支持：
-                <a href="http://www.ednet.cn" class="white" target="_blank">e德互联</a>
-              </dt>
-            </dl>
-          </div>
+      <div class="contact-info container">
+        <dl class="info">
+          <dd>
+            <h3>{{ companyInfo.appName }}</h3>
+          </dd>
+          <dd>
+            <i class="fas fa-phone-alt"></i>
+            {{ companyInfo.tel }}
+          </dd>
+          <dd>
+            <i class="fas fa-location-arrow"></i>
+            {{ companyInfo.appAddress }}
+          </dd>
+          <dd>
+            <i class="fas fa-envelope"></i>
+            {{ companyInfo.email }}
+          </dd>
+        </dl>
+        <div v-if="companyInfo.weixinBarCode" class="qrcode">
+          <img :src="companyInfo.weixinBarCode" />
         </div>
+      </div>
+      <div class="container icp">
+        <dl>
+          <dt>
+            Copyright
+            <i class="far fa-copyright"></i>
+            2019-{{ year }}
+            {{ companyInfo.appName }}
+          </dt>
+          <dd v-for="item in companyInfo.icps" :key="item.id">
+            <a class="gongan white" target="_blank" href="http://beian.miit.gov.cn/publish/query/indexFirst.action">
+              <span>津ICP备{{ item }}</span>
+            </a>
+          </dd>
+          <dd v-for="item in companyInfo.gongAns" :key="item.id">
+            <a
+              :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${item}`"
+              class="gongan white"
+              target="_blank"
+            >
+              <img src="@/assets/imgs/gongan.png" />
+              <span>津公网安备{{ item }}号</span>
+            </a>
+          </dd>
+          <dd>
+            技术支持：
+            <a href="http://www.ednet.cn" class="white" target="_blank">e德互联</a>
+          </dd>
+        </dl>
       </div>
     </footer>
   </div>

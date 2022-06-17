@@ -11,11 +11,7 @@
   -ms-user-select: none;
   -moz-user-select: none;
   transition: all 0.3s;
-  @media @max-tablet{
-    margin: 2rem 0 4rem;
-  }
   @media @tablet{
-    margin: 5rem 0 6rem;
   }
 }
 .page-item {
@@ -37,15 +33,12 @@
   line-height: 1.25;
   background-color: @color-white;
   border: 1px solid #dee2e6;
-  // border-radius: 50rem;
-  color: #595959;
+  color: @color-gray;
 }
 
 .page-link:hover {
   z-index: 2;
   text-decoration: none;
-  border-color: #dee2e6;
-  color: @new-hover-color;
   background-color: hsla(@color-primary-lighter-hsl, .1);
 }
 

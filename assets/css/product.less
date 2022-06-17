@@ -1,22 +1,11 @@
 // out: false
-.page-product-head{
-  margin-top: 15px;
-  margin-bottom: 2.5rem;
-  color: #000000;
-  font-size: 15px;
+.page-product-head {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
   line-height: 1.75;
-  padding-left: 15px;
-  padding-right: 15px;
-  cursor: text;
   white-space: pre-wrap;
-  
   transition: all 0.2s;
-  @media @tablet{
-    font-size: 18px;
-    line-height: 2;
-    margin-top: 30px;
-    margin-bottom: 5rem;
-  }
 }
 .page-product-list {
   min-height: 20rem;
@@ -68,13 +57,12 @@
         height: 3.6rem;
         a {
           transition: all 0.2s;
-          color: #595959;
-          color: @new-hover-color;
+          color: @color-gray;
         }
       }
       .cover-content {
         display: none;
-        color: #b3b3b3;
+        color: @color-gray;
         @media (min-width: 768px) {
           display: block;
           max-height: 4rem;
@@ -86,9 +74,8 @@
     }
     &:hover {
       // box-shadow: 0 0 0 0.1rem @color-gray;
-      .cover-info{
-        .cover-title > a{
-          color: @new-hover-color;
+      .cover-info {
+        .cover-title > a {
         }
       }
     }
@@ -103,7 +90,7 @@
     display: block;
     margin-top: 0rem;
   }
-  
+
   width: 100%;
   // padding-bottom: 20px;
   .name {
@@ -114,13 +101,13 @@
     font-weight: normal;
     color: #555;
   }
-  .product-detail-date{
-    color: #b3b3b3;
+  .product-detail-date {
+    color: @color-gray;
     font-size: 1.2rem;
     margin-top: 10px;
     font-weight: normal;
   }
-  .product-sub-hr{
+  .product-sub-hr {
     margin-top: 15px;
     margin-bottom: 15px;
     box-sizing: content-box;
@@ -130,17 +117,17 @@
     border-top: 1px solid #e5e5e5;
   }
   transition: all 0.2s;
-  @media @tablet{
+  @media @tablet {
     // padding-top: 30px;
     // padding-bottom: 50px;
     .name {
       font-size: 2.4rem;
     }
-    .product-detail-date{
+    .product-detail-date {
       font-size: 1.6rem;
       margin-top: 15px;
     }
-    .product-sub-hr{
+    .product-sub-hr {
       margin-top: 20px;
       margin-bottom: 20px;
     }

@@ -1,7 +1,4 @@
 // out: false
-.container .page-content.honor-content {
-  padding-top: 0;
-}
 .honor-list {
   ul {
     display: flex;
@@ -13,11 +10,6 @@
       margin-right: 5%;
       margin-bottom: 1rem;
       transition: all 0.5s;
-      &:hover {
-        a {
-          color: @new-hover-color;
-        }
-      }
       .img-container {
         height: 86%;
         display: inline-block;
@@ -30,9 +22,7 @@
       }
       a {
         color: #000000;
-        color: @new-hover-color;
         &:hover {
-          color: @new-hover-color;
           text-decoration: none;
         }
         &.gray {
@@ -80,20 +70,5 @@
       }
     }
   }
-  @media @min-desktop {
-    ul {
-      li {
-        width: 18%;
-        margin-left: 1%;
-        margin-right: 1%;
-        margin-bottom: 2rem;
-        a {
-          span {
-            padding: 0;
-            font-size: 18px;
-          }
-        }
-      }
-    }
-  }
+ 
 }

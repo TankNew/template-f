@@ -9,33 +9,10 @@
   box-sizing: border-box;
   padding: 0 15px;
   left: 0;
-  bottom: 10px;
+  bottom: 0;
   margin: 0 auto;
   transition: all 0.2s;
-  @media @tablet{
-    bottom: 2px;
-  }
-  .container{
-    width: 100%;
-    max-width: unset;
 
-    transition: all 0.3s;
-    @media @max-tablet{
-      max-width: unset;
-    }
-    @media @tablet{
-      max-width: @min-width;
-      .breadcrumb {
-        margin-bottom: 20px;
-      }
-    }
-    @media @min-desktop {
-      max-width: @max-width;
-      .breadcrumb {
-        margin-bottom: 30px;
-      }
-    }
-  }
   .breadcrumb {
     display: -ms-flexbox;
     display: flex;
@@ -46,17 +23,10 @@
     margin-bottom: 10px;
     border-radius: 0.25rem;
   }
-  .breadcrumb-item + .breadcrumb-item {
-    padding-left: 0.5rem;
-  }
   .breadcrumb-item {
-    // text-shadow: none;
     transition: all 0.3s;
-    @media @max-tablet{
-      font-size: 14px;
-    }
-    @media @tablet{
-      font-size: 18px;
+    font-size: 1.8rem;
+    @media @tablet {
     }
     a {
       color: @color-white;
@@ -65,31 +35,25 @@
       vertical-align: middle;
       padding: 0 0.6rem 0 0;
       transition: all 0.3s;
-      @media @max-tablet{
-        font-size: 12px;
-      }
-      @media @tablet{
+      @media @tablet {
         font-size: 14px;
       }
-      @media @min-desktop {
-        font-size: 14px;
+    }
+    &.active {
+      color: @color-white;
+    }
+    & + .breadcrumb-item {
+      padding-left: 0.5rem;
+      &::before {
+        display: inline-block;
+        padding: 0 1rem;
+        color: @color-white;
+        content: '>';
       }
     }
   }
 
-  .breadcrumb-item + .breadcrumb-item::before {
-    display: inline-block;
-    padding: 0 1rem;
-    color: @color-white;
-    content: '>';
-  }
-
-  .breadcrumb-item.active {
-    color: @color-white;
-  }
-
-
-  .path-bor{
+  .path-bor {
     display: flex;
     flex-wrap: wrap;
     .item {
@@ -109,7 +73,7 @@
       }
     }
     transition: all 0.2s;
-    @media @tablet{
+    @media @tablet {
       .item {
         line-height: 58px;
         padding: 0 10px;

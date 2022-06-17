@@ -56,24 +56,24 @@ body {
 
 .container {
   width: 100%;
-  // padding-right: 15px;
-  // padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  // @media (min-width: 576px) {
-  //   max-width: 540px;
-  // }
-
-  @media (min-width: 960px) {
-    max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  @media (min-width: 576px) {
+    max-width: 540px;
   }
-
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
   @media (min-width: 992px) {
     max-width: 960px;
   }
-
-  @media @min-desktop {
-    max-width: @max-width;
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+  @media (min-width: 1400px) {
+    max-width: 1320px;
   }
 }
 
@@ -91,6 +91,9 @@ a {
     &:hover {
       text-decoration: underline;
     }
+  }
+  &.under-line {
+    text-decoration: underline;
   }
   &.gray {
     color: @color-gray;
@@ -265,9 +268,8 @@ input[type='month'] {
   opacity: 0;
 }
 #app,
-#__nuxt
-// #__layout
-{
+#__nuxt,
+#__layout {
   height: 100%;
 }
 
@@ -321,7 +323,7 @@ input[type='month'] {
     2px -2px 0px #fff, 2px -1px 0px #fff, 2px 0px 0px #fff, 2px 1px 0px #fff, 2px 2px 0px #fff, 1px 2px 0px #fff,
     0px 2px 0px #fff, -1px 2px 0px #fff, -2px 2px 0px #fff, -2px 1px 0px #fff, -2px 0px 0px #fff, -2px -1px 0px #fff;
 }
-.development {
+.dev-tools {
   z-index: 2000;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
@@ -346,4 +348,8 @@ input[type='month'] {
     border: 1px solid @color-white;
     color: white;
   }
+}
+.my-5 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }

@@ -25,7 +25,7 @@ const mutations = {
 }
 const getters = {
   getCulture(state) {
-    return state.culture  
+    return state.culture
   },
   getTenantId(state) {
     return state.tenantId
@@ -64,14 +64,13 @@ const actions = {
           }
         }
         context.state.currentPathParent = currentPathParent
-        context.state.currentPathBrother = parents && parents.length > 1
-          ? parents[parents.length - 2].children : []
+        context.state.currentPathBrother = parents && parents.length > 1 ? parents[parents.length - 2].children : []
       }
     }
   },
   setBreadCrumb(context, ...args) {
     context.state.breadCrumbItems = []
-    for (let i = 1; i < args.length; i++) {
+    for (let i = 0; i < args.length; i++) {
       context.state.breadCrumbItems.push({
         text: args[i].displayName,
         to: args[i].url
@@ -215,6 +214,14 @@ const actions = {
   },
   async getUsersId(context, params) {
     const res = await this.$axios.get('/api/services/app/User/GetUserLessInfo', params)
+    if (res.data.success) return res.data.result
+  },
+  async getRoles(context) {
+    const res = await this.$axios.get('/api/services/app/Role/GetRolesLess')
+    if (res.data.success) return res.data.result
+  },
+  async getUsersInRole(context, params) {
+    const res = await this.$axios.get('/api/services/app/User/GetUsersInRole', params)
     if (res.data.success) return res.data.result
   }
 }

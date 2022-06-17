@@ -47,8 +47,6 @@
         overflow: hidden;
         font-size: 1.4rem;
         font-weight: bold;
-        color: @new-unhover-color;
-        color: @new-hover-color;
         margin-bottom: 0.5rem;
       }
       .news-intro {
@@ -56,16 +54,14 @@
         display: block;
         text-overflow: ellipsis;
         overflow: hidden;
-        color: #b3b3b3;
+        color: @color-gray;
         font-size: 12px;
         line-height: 1.4;
         span {
-          color: @new-hover-color;
         }
       }
     }
     &:hover .news-info .news-title {
-      color: @new-hover-color;
     }
     transition: all 0.2s;
     @media @tablet{
