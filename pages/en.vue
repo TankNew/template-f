@@ -32,7 +32,7 @@
                 </a>
               </li>
               <li v-if="multiLangs">
-                <a @click="changeLanguage('en')">
+                <a @click="changeLanguage('zh-CN')">
                   <i class="fas fa-language"></i>
                 </a>
               </li>

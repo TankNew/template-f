@@ -144,10 +144,15 @@
       font-weight: bold;
       white-space: nowrap;
       text-overflow: clip;
+      padding: 1rem 0;
       overflow: hidden;
     }
     .value {
       display: block;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
   }
   .user-contact-info {
