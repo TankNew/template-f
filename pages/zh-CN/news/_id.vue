@@ -61,24 +61,21 @@
         </dl>
       </div> -->
       <div class="page-news-list">
-        <ul v-if="pageContent && pageContent.items && pageContent.items.length">
+        <ul>
           <li v-for="item in pageContent.items" :key="item.id">
             <div class="news-date">
-              <img class="newImg" :src="item.cover">
+              <img class="newImg" :src="item.cover" />
             </div>
             <div class="news-info">
               <a class="news-title" href="javascript:void(0)" @click="goNewsDetail(item.id, 1)">{{ item.title }}</a>
               <p class="news-intro" @click="goNewsDetail(item.id, 1)">
-                <i style="font-style: normal;" v-html="filter(item.content, 110)"></i>
+                <i style="font-style: normal" v-html="filter(item.content, 110)"></i>
                 <span>[查看详情]</span>
               </p>
-              <div class="news-date">{{ formatDate( item.creationTime ) }}</div>
+              <div class="news-date">{{ formatDate(item.creationTime) }}</div>
             </div>
           </li>
         </ul>
-        <div v-else class="null">
-          该分类中暂无新闻
-        </div>
       </div>
       <div class="my-5">
         <pagination

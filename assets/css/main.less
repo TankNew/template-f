@@ -9,8 +9,15 @@
   padding-bottom: 1.5rem;
   min-height: calc(100% - 30rem);
   position: relative;
+  display: flex;
+  flex-direction: column;
   @media @tablet {
     padding-top: 13rem;
+  }
+  > .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   // 内页标题
   .page-title {
@@ -41,6 +48,19 @@
       font-size: 18px;
       color: #555;
       font-weight: normal;
+      position: relative;
+      padding-bottom: 1.5rem;
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 36px;
+        height: 3px;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        background-color: hsla(@color-primary-lighter-hsl, 0.5);
+        transform: translateX(-50%);
+      }
     }
     .subtitle {
       color: #9a9a9a;

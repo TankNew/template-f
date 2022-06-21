@@ -19,16 +19,19 @@
       </section> -->
       <section v-if="group1 && group1.children.length > 0" class="news-block">
         <div class="news-list">
+          <h3 class="block-title">
+            <span class="name">{{ group1.title }}</span>
+          </h3>
           <dl>
-            <dt class="block-title">
-              <span class="name">{{ group1.title }}</span>
-            </dt>
             <dd v-for="item in group1.children" :key="item.id">
               <img class="backimg" :src="item.cover" />
-              <div class="news-info" @click="goNewsDetail(item.id, group1.type)">
+              <div class="content" @click="goNewsDetail(item.id, group1.type)">
                 <div class="body">
                   <img class="icon" :src="item.icon" />
-                  <span class="name">{{ item.displayName }}</span>
+                  <div class="info">
+                    <span class="subtitle">English Intro</span>
+                    <span class="name">{{ item.displayName }}</span>
+                  </div>
                 </div>
               </div>
             </dd>
@@ -38,22 +41,16 @@
     </section>
     <section class="white-block"></section>
     <section v-if="companyInfo" class="companyInfo-block container">
-      <div class="companyInfo-list">
-        <dl>
-          <dt class="block-title">
-            <span class="name">{{ $L('AboutUs') }}</span>
-            <!-- <span class="subtitle">123654</span> -->
-          </dt>
-          <dd class="imgList">
-            <div v-for="(item, index) in htmlImgsList(companyInfo.content)" :key="index">
-              <img :src="item" @click="goAbout()" />
-            </div>
-          </dd>
-          <dd class="text">
-            <div v-html="filter(companyInfo.content, 800)"></div>
-          </dd>
-        </dl>
-      </div>
+      <h3 class="block-title">
+        <span class="name">{{ $L('AboutUs') }}</span>
+        <!-- <span class="subtitle">123654</span> -->
+      </h3>
+      <dl class="imgList">
+        <dd v-for="(item, index) in htmlImgsList(companyInfo.content)" :key="index">
+          <img :src="item" @click="goAbout()" />
+        </dd>
+      </dl>
+      <div class="text" v-html="filter(companyInfo.content, 800)"></div>
     </section>
     <section class="white-block"></section>
     <section v-if="ad1" class="ad-img-block">
@@ -73,24 +70,22 @@
         <section class="looper">
           <div class="page-news-list">
             <div v-for="item in group2.items" :key="item.id" class="page-news-item">
-              <div class="news-date">
-                <img class="newImg" :src="item.cover" />
+              <div class="news-cover">
+                <img :src="item.cover" />
               </div>
               <div class="news-info">
-                <a class="news-title" href="javascript:void(0)" @click="goNewsDetail(item.id, 1)">{{ item.title }}</a>
-                <p class="news-intro" @click="goNewsDetail(item.id, 1)">
-                  <!-- {{  }} -->
-                  <i style="font-style: normal" v-html="filter(item.content, 140)"></i>
-                  <span>{{ $L('More') }} </span>
-                </p>
-                <div class="news-date">{{ formatDate(item.creationTime) }}</div>
+                <h3 class="news-title" @click="goNewsDetail(item.id, 1)">{{ item.title }}</h3>
+                <div class="news-intro" @click="goNewsDetail(item.id, 1)" v-html="filter(item.content, 340)"></div>
+                <span class="news-date">
+                  {{ formatDate(item.creationTime) }}
+                </span>
               </div>
             </div>
-            <span class="tomore">
+            <div class="tomore">
               <a href="javascript:void(0)" @click="goNewsGroup(group2.catalogGroupId, group2.type)"
                 >{{ $L('More') }} ></a
               >
-            </span>
+            </div>
           </div>
         </section>
       </section>
@@ -259,7 +254,7 @@ export default {
       this.$router.push({ path: `/${this.culture}/About` })
     },
     filter(val, length) {
-      return tools.cutString(tools._filter(val), length)
+      return tools.cutString(tools._filter(val), length) + '<a>' + this.$L('More') + '</a>'
     },
     formatDate(val) {
       return tools.date(val)

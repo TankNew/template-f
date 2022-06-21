@@ -1,7 +1,7 @@
 <template>
   <div class="body-container">
     <!-- 头部 -->
-    <header :class="currentPath.navbarType !== 5 ? 'sub' : ''" @click="closeNavbar">
+    <header :class="[currentPath.navbarType !== 5 ? 'sub' : '', isScroll ? 'color' : '']" @click="closeNavbar">
       <section class="header-topbar">
         <div class="container"></div>
       </section>
@@ -182,6 +182,7 @@ export default {
   },
   data() {
     return {
+      isScroll: false,
       slide: 0,
       year: new Date().getFullYear(),
       sliding: null,
@@ -249,6 +250,8 @@ export default {
   watch: {
     $route(val) {
       this.setcurrentPath({ path: this.$route.path })
+      console.log(this.currentPathBrother)
+      console.log(this.currentPathParent)
     }
   },
   async asyncData(context) {
@@ -275,9 +278,14 @@ export default {
   created() {
     this.setcurrentPath({ path: this.$route.path })
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll, true)
+  },
   methods: {
     handleSwiperReadied(swiper) {},
+    handleScroll() {
+      this.isScroll = document.documentElement.scrollTop > 10
+    },
     closeNavbar() {
       this.$refs.navbar.close()
     },

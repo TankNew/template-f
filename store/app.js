@@ -64,7 +64,8 @@ const actions = {
           }
         }
         context.state.currentPathParent = currentPathParent
-        context.state.currentPathBrother = parents && parents.length > 1 ? parents[parents.length - 2].children : []
+
+        context.state.currentPathBrother = currentPathParent.children
       }
     }
   },

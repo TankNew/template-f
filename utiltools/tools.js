@@ -92,12 +92,12 @@ const cutString = function(str, len) {
     if (str.charCodeAt(i) > 128) {
       strlen = strlen + 2
       if (strlen >= len) {
-        return s.substring(0, s.length - 1) + '..'
+        return s.substring(0, s.length - 1) + '......'
       }
     } else {
       strlen = strlen + 1
       if (strlen >= len) {
-        return s.substring(0, s.length - 2) + '..'
+        return s.substring(0, s.length - 2) + '......'
       }
     }
   }
