@@ -34,6 +34,12 @@ const getters = {
 let parents = []
 const actions = {
   setCookie(context, language) {
+    this.$cookies.set(context.state.headerName, language, {
+      path: context.rootState.abp.appPath || '/',
+      maxAge: 5 * 365 * 86400000,
+      secure: true,
+      sameSite: 'None'
+    })
     context.commit('setCulture', language)
   },
   setcurrentPath(context, { path, grandId }) {

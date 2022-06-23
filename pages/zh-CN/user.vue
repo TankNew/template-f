@@ -104,7 +104,6 @@ export default {
     },
     chooseUser(item) {
       this.userFocus = item
-      console.log(this.userFocus)
     },
     clearFocus() {
       this.userFocus = {}

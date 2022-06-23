@@ -250,18 +250,10 @@ export default {
   watch: {
     $route(val) {
       this.setcurrentPath({ path: this.$route.path })
-      console.log(this.currentPathBrother)
-      console.log(this.currentPathParent)
     }
   },
   async asyncData(context) {
     let language = 'zh-CN'
-    context.app.$cookies.set(context.store.state.app.headerName, language, {
-      path: context.store.state.abp.appPath || '/',
-      maxAge: 5 * 365 * 86400000,
-      secure: true,
-      sameSite: 'None'
-    })
     context.store.dispatch('app/setCookie', language)
     await context.store.dispatch('app/getCompanyInfo')
     await context.store.dispatch('app/getNavbars')
