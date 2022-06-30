@@ -12,7 +12,7 @@ do
     # echo $theme
     lessc $theme static/css/${${theme%.*}##*/}.css
 done
-
+npm run build
 docker build -t docker.ednet.cn/template-f .
 docker push docker.ednet.cn/template-f
 docker rmi $(docker images -f "dangling=true" -q)

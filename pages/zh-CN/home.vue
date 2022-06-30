@@ -1,43 +1,25 @@
 <template>
   <section class="home">
-    <section class="container">
-      <!-- <section v-if="ad1 || (announces && announces.length > 0)" class="ad-announce">
-        <section v-if="announces && announces.length > 0" class="announce-block">
-          <section class="looper">
-            <div v-swiper="announceSwiperOption">
-              <div class="swiper-wrapper">
-                <div v-for="item in announces" :key="item.id" :data-index="item.id" class="swiper-slide">
-                  <div class="cover">
-                    <img :src="item.cover" />
-                  </div>
-                  <h3>{{ item.title }}</h3>
+    <section v-if="group1 && group1.children.length > 0" class="news-block container">
+      <div class="news-list">
+        <h3 class="block-title">
+          <span class="name">{{ group1.title }}</span>
+        </h3>
+        <dl>
+          <dd v-for="item in group1.children" :key="item.id">
+            <img class="backimg" :src="item.cover" />
+            <div class="content" @click="goNewsGroup(item.id, group1.type)">
+              <div class="body">
+                <img class="icon" :src="item.icon" />
+                <div class="info">
+                  <span class="subtitle">English Intro</span>
+                  <span class="name">{{ item.displayName }}</span>
                 </div>
               </div>
             </div>
-          </section>
-        </section>
-      </section> -->
-      <section v-if="group1 && group1.children.length > 0" class="news-block">
-        <div class="news-list">
-          <h3 class="block-title">
-            <span class="name">{{ group1.title }}</span>
-          </h3>
-          <dl>
-            <dd v-for="item in group1.children" :key="item.id">
-              <img class="backimg" :src="item.cover" />
-              <div class="content" @click="goNewsDetail(item.id, group1.type)">
-                <div class="body">
-                  <img class="icon" :src="item.icon" />
-                  <div class="info">
-                    <span class="subtitle">English Intro</span>
-                    <span class="name">{{ item.displayName }}</span>
-                  </div>
-                </div>
-              </div>
-            </dd>
-          </dl>
-        </div>
-      </section>
+          </dd>
+        </dl>
+      </div>
     </section>
     <section class="white-block"></section>
     <section v-if="companyInfo" class="companyInfo-block container">

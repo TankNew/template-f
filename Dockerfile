@@ -6,14 +6,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install
-COPY . .
-RUN npm run build
+COPY .nuxt ./.nuxt
+COPY utiltools ./utiltools
+COPY static ./static
+COPY nuxt.config.js ./
 
-FROM node:11-alpine
-COPY --from=build /app /
 ENV HOST 0.0.0.0 
 ENV PORT 80 
-ENV ENV NODE_ENV=production
-ENV NUXT_ENV_THEME=red
-ENV NUXT_ENV_TENANT_ID=18
+ENV NODE_ENV=production 
 CMD ["npm","start"]
