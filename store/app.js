@@ -136,7 +136,6 @@ const actions = {
   async getOrganization(context, params) {
     const res = await this.$axios.get('/api/services/app/Organization/GetAll', params)
     if (res.data.success) {
-      context.state.partners = res.data.result
       return res.data.result
     }
   },
@@ -150,7 +149,6 @@ const actions = {
   async getHr(context, params) {
     const res = await this.$axios.get('/api/services/app/Hr/GetAll', params)
     if (res.data.success) {
-      context.state.partners = res.data.result
       return res.data.result
     }
   },
